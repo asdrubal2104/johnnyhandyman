@@ -1,0 +1,304 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ZoomIn, X, Star } from "@lucide/astro";
+---
+
+<BaseLayout
+  title="Gallery - Johnny Pro Handyman Projects | Before & After Photos"
+  description="View our portfolio of completed handyman projects in Utah. See the quality of our work in drywall, plumbing, electrical, painting, and carpentry."
+>
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-linear-to-b from-gray-900 to-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
+          Our <span class="text-orange-500">Work</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Take a look at some of our recent projects. Quality craftsmanship and attention to detail in every job.
+        </p>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          {
+            src: "https://images.unsplash.com/photo-1589939705384-5185138a04b9?auto=format&fit=crop&q=80&w=800",
+            title: "Drywall Repair & Finishing",
+            category: "Drywall"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800",
+            title: "Plumbing Installation",
+            category: "Plumbing"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&q=80&w=800",
+            title: "Electrical Wiring",
+            category: "Electrical"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&q=80&w=800",
+            title: "Interior Painting",
+            category: "Painting"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1503387762-592dee39c560?auto=format&fit=crop&q=80&w=800",
+            title: "Custom Carpentry",
+            category: "Carpentry"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=800",
+            title: "Kitchen Renovation",
+            category: "Renovation"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=800",
+            title: "Bathroom Remodel",
+            category: "Renovation"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&q=80&w=800",
+            title: "Home Maintenance",
+            category: "Maintenance"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+            title: "Exterior Work",
+            category: "Exterior"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&q=80&w=800",
+            title: "Door Installation",
+            category: "Carpentry"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800",
+            title: "Fixture Replacement",
+            category: "Plumbing"
+          },
+          {
+            src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800",
+            title: "Trim & Molding",
+            category: "Carpentry"
+          }
+        ].map((item, index) => (
+          <article 
+            class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
+            data-gallery-item
+            data-index={index}
+          >
+            <img 
+              src={item.src}
+              alt={item.title}
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+            
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <div class="text-orange-500 text-sm font-semibold mb-2">{item.category}</div>
+                <h3 class="text-white text-xl font-bold font-inter">{item.title}</h3>
+              </div>
+              
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
+                  <ZoomIn class="w-8 h-8 text-white" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Border on hover -->
+            <div class="absolute inset-0 border-4 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
+          What Our <span class="text-orange-500">Clients Say</span>
+        </h2>
+        <p class="text-xl text-gray-400">
+          Don't just take our word for it - hear from our satisfied customers
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          {
+            name: "Sarah Johnson",
+            location: "Salt Lake City",
+            rating: 5,
+            text: "Johnny did an amazing job repairing our drywall. Professional, punctual, and the quality of work exceeded our expectations. Highly recommend!"
+          },
+          {
+            name: "Mike Peterson",
+            location: "Provo",
+            rating: 5,
+            text: "Fast, reliable, and affordable. Johnny fixed our plumbing issue quickly and even gave us tips on preventing future problems. Will definitely call again!"
+          },
+          {
+            name: "Emily Rodriguez",
+            location: "Ogden",
+            rating: 5,
+            text: "We've used Johnny Pro for multiple projects now. From electrical work to painting, every job has been done perfectly. Our go-to handyman!"
+          }
+        ].map((testimonial) => (
+          <div class="bg-gray-900/50 border border-white/10 rounded-2xl p-8 hover:border-orange-500/50 transition-all">
+            <div class="flex gap-1 mb-4">
+              {Array.from({ length: testimonial.rating }).map(() => (
+                <Star class="w-5 h-5 text-orange-500 fill-current" />
+              ))}
+            </div>
+            <p class="text-gray-300 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+            <div>
+              <div class="text-white font-bold">{testimonial.name}</div>
+              <div class="text-gray-400 text-sm">{testimonial.location}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-linear-to-br from-orange-500 to-orange-600">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 font-inter">
+        Ready to Start Your Project?
+      </h2>
+      <p class="text-xl text-white/90 mb-8">
+        Let's make your home improvement vision a reality. Contact us today for a free quote.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/contact"
+          class="inline-block bg-white text-orange-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95"
+        >
+          Get Free Quote
+        </a>
+        <a 
+          href="tel:+18015551234"
+          class="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+        >
+          Call (801) 555-1234
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Lightbox Modal -->
+  <div 
+    id="gallery-lightbox" 
+    class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 items-center justify-center p-4"
+  >
+    <button 
+      id="lightbox-close" 
+      class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white transition-colors z-50 p-2 bg-black/20 rounded-full hover:bg-black/40 backdrop-blur-sm"
+    >
+      <X class="w-8 h-8 md:w-10 md:h-10" />
+    </button>
+
+    <div 
+      id="lightbox-content"
+      class="relative max-w-7xl max-h-[90vh] w-full flex flex-col items-center pointer-events-none transition-all duration-300 scale-95 opacity-0"
+    >
+      <img 
+        id="lightbox-image" 
+        src="" 
+        alt="" 
+        class="max-w-full max-h-[75vh] md:max-h-[85vh] object-contain rounded-lg shadow-2xl pointer-events-auto select-none"
+      />
+      <div 
+        id="lightbox-caption" 
+        class="mt-4 text-white text-lg md:text-2xl font-medium text-center pointer-events-auto font-inter px-4"
+      ></div>
+      <div 
+        id="lightbox-category" 
+        class="mt-2 text-orange-500 text-xs md:text-sm font-semibold uppercase tracking-wider pointer-events-auto"
+      ></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  function setupGallery() {
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxImg = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const closeBtn = document.getElementById('lightbox-close');
+    const items = document.querySelectorAll('[data-gallery-item]');
+
+    if (!lightbox || !lightboxContent || !lightboxImg || !lightboxCaption || !lightboxCategory || !closeBtn) return;
+
+    function openLightbox(src: string, title: string, category: string) {
+      lightbox!.classList.remove('hidden');
+      lightbox!.classList.add('flex');
+      
+      // Small delay to allow display:flex to apply before adding opacity/scale
+      requestAnimationFrame(() => {
+        lightbox!.classList.remove('opacity-0');
+        lightboxContent!.classList.remove('scale-95', 'opacity-0');
+        lightboxContent!.classList.add('scale-100', 'opacity-100');
+      });
+      
+      lightboxImg!.src = src;
+      lightboxCaption!.textContent = title;
+      lightboxCategory!.textContent = category;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      // Fade out backdrop
+      lightbox!.classList.add('opacity-0');
+      // Scale down content
+      lightboxContent!.classList.remove('scale-100', 'opacity-100');
+      lightboxContent!.classList.add('scale-95', 'opacity-0');
+
+      setTimeout(() => {
+        lightbox!.classList.remove('flex');
+        lightbox!.classList.add('hidden');
+        lightboxImg!.src = '';
+      }, 300);
+      document.body.style.overflow = '';
+    }
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const title = item.querySelector('h3')?.textContent || '';
+        const category = item.querySelector('.text-orange-500')?.textContent || '';
+        
+        if (img) {
+          openLightbox(img.src, title, category);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Run on initial load
+  setupGallery();
+
+  // Run on view transitions
+  document.addEventListener('astro:page-load', setupGallery);
+</script>

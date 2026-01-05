@@ -1,0 +1,38 @@
+---
+const {
+  serviceName = "Handyman Service",
+  serviceType,
+  description = "Professional handyman services in Utah.",
+  provider = "Johnny Pro Handyman Services",
+  areaServed = "Utah",
+  url,
+} = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: serviceType || serviceName,
+  name: serviceName,
+  description: description,
+  provider: {
+    "@type": "LocalBusiness",
+    name: provider,
+    telephone: "+18015551234",
+    url: "https://www.example.com",
+  },
+  areaServed: {
+    "@type": "State",
+    name: areaServed,
+  },
+  url:
+    url ||
+    `https://www.example.com/services/${serviceName.toLowerCase().replace(/\s+/g, "-")}`,
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "USD",
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

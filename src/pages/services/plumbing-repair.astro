@@ -1,0 +1,180 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServiceIntro from "@/components/sections/ServiceIntro.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { Droplet, CheckCircle2, Wrench, Clock } from "@lucide/astro";
+
+const benefits = [
+  "Fast leak detection and repair",
+  "Fixture installation and replacement",
+  "Drain cleaning and unclogging",
+  "Water heater services",
+  "Pipe repair and replacement",
+  "Emergency plumbing available",
+];
+
+const faqs = [
+  {
+    question: "How quickly can you fix a leak?",
+    answer:
+      "We offer same-day service for urgent leaks. Most leak repairs can be completed within a few hours of arrival.",
+  },
+  {
+    question: "Do you install new fixtures?",
+    answer:
+      "Yes! We install sinks, faucets, toilets, garbage disposals, and other plumbing fixtures. We can also help you select the right fixtures for your needs.",
+  },
+  {
+    question: "What if my drain is clogged?",
+    answer:
+      "We have professional drain cleaning equipment to clear even the toughest clogs. We'll identify the cause and provide a lasting solution.",
+  },
+  {
+    question: "Are you licensed for plumbing work?",
+    answer:
+      "Yes, we're fully licensed and insured for plumbing services in Utah. All work meets local plumbing codes.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Plumbing Services in Utah | Fast Leak Repair"
+  description="Expert plumbing repair and installation in Utah. Leak repair, fixture installation, drain cleaning, and more. Licensed, insured, and available same-day."
+>
+  <SchemaService
+    serviceName="Plumbing Services"
+    serviceType="Plumbing Installation and Repair"
+    description="Professional plumbing services including leak repair, fixture installation, drain cleaning, and pipe repair throughout Utah."
+  />
+
+  <Breadcrumbs />
+
+  <ServiceIntro
+    title="Professional Plumbing Services"
+    description="From leaky faucets to complete fixture installations, we handle all your plumbing needs with expertise and efficiency. Fast response times and quality workmanship guaranteed."
+    icon={Droplet}
+    benefits={benefits}
+    image="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1200"
+  />
+
+  <!-- Services Details -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Plumbing <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              title: "Leak Repair",
+              description:
+                "Fast detection and repair of leaks in faucets, pipes, and fixtures to prevent water damage.",
+              icon: Droplet,
+            },
+            {
+              title: "Fixture Installation",
+              description:
+                "Professional installation of sinks, faucets, toilets, and other plumbing fixtures.",
+              icon: Wrench,
+            },
+            {
+              title: "Drain Cleaning",
+              description:
+                "Clear clogged drains and pipes using professional equipment and techniques.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Pipe Repair",
+              description:
+                "Repair or replace damaged pipes to restore proper water flow and prevent leaks.",
+              icon: Wrench,
+            },
+            {
+              title: "Garbage Disposal",
+              description:
+                "Install, repair, or replace garbage disposals for efficient kitchen waste management.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Emergency Service",
+              description:
+                "Same-day emergency plumbing services for urgent issues that can't wait.",
+              icon: Clock,
+            },
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-white" />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {service.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Issues Section -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Common Plumbing <span class="text-orange-500">Issues</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          [
+            {
+              issue: "Dripping Faucets",
+              solution:
+                "We replace worn washers and seals to stop annoying drips and save water.",
+            },
+            {
+              issue: "Running Toilets",
+              solution:
+                "We repair or replace faulty flappers and fill valves to stop water waste.",
+            },
+            {
+              issue: "Slow Drains",
+              solution:
+                "We clear clogs and buildup to restore proper drainage throughout your home.",
+            },
+            {
+              issue: "Low Water Pressure",
+              solution:
+                "We diagnose and fix the cause, whether it's clogged aerators or pipe issues.",
+            },
+            {
+              issue: "Leaky Pipes",
+              solution:
+                "We locate and repair leaks before they cause serious water damage.",
+            },
+            {
+              issue: "Water Heater Issues",
+              solution:
+                "We service and repair water heaters to ensure reliable hot water supply.",
+            },
+          ].map((item) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6">
+              <h3 class="text-xl font-bold text-orange-500 mb-3 font-inter">
+                {item.issue}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{item.solution}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <CTA />
+</BaseLayout>

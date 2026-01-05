@@ -1,0 +1,113 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { Wrench } from "@lucide/astro";
+---
+
+<BaseLayout
+  title="All Handyman Services in Utah | Johnny Pro Complete Service List"
+  description="Complete list of handyman services in Utah. Drywall, plumbing, electrical, painting, carpentry, and more. Professional, licensed, and insured services."
+>
+  <SchemaService
+    serviceName="Handyman Services"
+    serviceType="General Handyman Services"
+    description="Comprehensive handyman services including repairs, installations, and maintenance for homes throughout Utah."
+  />
+
+  <Breadcrumbs />
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-linear-to-b from-gray-900 to-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div
+        class="w-20 h-20 bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20 mx-auto"
+      >
+        <Wrench class="w-10 h-10 text-white" />
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
+        Our <span class="text-orange-500">Services</span>
+      </h1>
+
+      <p class="text-xl text-gray-300 leading-relaxed mb-8">
+        From minor repairs to major renovations, Johnny Pro Handyman Services
+        handles it all. Browse our complete service list and discover how we can
+        help improve your home.
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a
+          href="/contact"
+          class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+        >
+          Get Free Quote
+        </a>
+        <a
+          href="tel:+18015551234"
+          class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all"
+        >
+          Call (801) 555-1234
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ServicesList />
+
+  <!-- Additional Services -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Additional <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          [
+            "Door Installation & Repair",
+            "Window Repair",
+            "Cabinet Installation",
+            "Shelving & Storage",
+            "Trim & Molding",
+            "Tile Repair",
+            "Flooring Repair",
+            "Fence Repair",
+            "Deck Maintenance",
+            "Gutter Cleaning",
+            "Pressure Washing",
+            "Assembly Services",
+            "TV Mounting",
+            "Smart Home Installation",
+            "Weatherproofing",
+            "And Much More!",
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-lg p-4 text-center hover:border-orange-500/50 transition-all">
+              <span class="text-white font-medium">{service}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="text-xl text-gray-400 mb-6">
+          Don't see what you need? We handle a wide variety of home repair and
+          improvement tasks.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+        >
+          Ask About Your Project
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FAQ />
+  <CTA />
+</BaseLayout>
+

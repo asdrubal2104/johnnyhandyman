@@ -1,0 +1,298 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Phone, Mail, MapPin, Clock, Send } from "@lucide/astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+---
+
+<BaseLayout
+  title="Contact Johnny Pro Handyman | Get Your Free Quote Today"
+  description="Contact Johnny Pro Handyman Services for a free quote. Call (801) 555-1234 or fill out our form. Serving all of Utah with professional home repair services."
+>
+  <SchemaLocal />
+
+  <!-- Hero Section -->
+  <section class="relative py-20 bg-linear-to-b from-gray-900 to-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
+          Get Your <span class="text-orange-500">Free Quote</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+          Ready to start your project? Contact us today for a free,
+          no-obligation quote. We're here to help with all your home repair and
+          maintenance needs.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-gray-900/50 border border-white/10 rounded-2xl p-8">
+          <h2 class="text-3xl font-bold text-white mb-6 font-inter">
+            Send Us a Message
+          </h2>
+          <form class="space-y-6" id="contact-form">
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Full Name *</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 bg-black border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Email Address *</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 bg-black border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div>
+              <label
+                for="phone"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Phone Number *</label
+              >
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                class="w-full px-4 py-3 bg-black border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
+                placeholder="(801) 555-1234"
+              />
+            </div>
+
+            <div>
+              <label
+                for="service"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Service Needed</label
+              >
+              <select
+                id="service"
+                name="service"
+                class="w-full px-4 py-3 bg-black border border-white/20 rounded-lg text-white focus:outline-none focus:border-orange-500 transition-colors"
+              >
+                <option value="">Select a service</option>
+                <option value="drywall">Drywall Repair</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="electrical">Electrical</option>
+                <option value="painting">Painting</option>
+                <option value="carpentry">Carpentry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Project Details *</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="5"
+                class="w-full px-4 py-3 bg-black border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors resize-none"
+                placeholder="Please describe your project or repair needs..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+            >
+              <Send class="w-5 h-5" />
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="space-y-8">
+          <div class="bg-gray-900/50 border border-white/10 rounded-2xl p-8">
+            <h2 class="text-3xl font-bold text-white mb-6 font-inter">
+              Contact Information
+            </h2>
+
+            <div class="space-y-6">
+              <a href="tel:+18015551234" class="flex items-start gap-4 group">
+                <div
+                  class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
+                >
+                  <Phone class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div class="text-sm text-gray-400 mb-1">Phone</div>
+                  <div
+                    class="text-xl font-semibold text-white group-hover:text-orange-500 transition-colors"
+                  >
+                    (801) 555-1234
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href="mailto:info@johnnypro.com"
+                class="flex items-start gap-4 group"
+              >
+                <div
+                  class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
+                >
+                  <Mail class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div class="text-sm text-gray-400 mb-1">Email</div>
+                  <div
+                    class="text-xl font-semibold text-white group-hover:text-orange-500 transition-colors"
+                  >
+                    info@johnnypro.com
+                  </div>
+                </div>
+              </a>
+
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center shrink-0"
+                >
+                  <MapPin class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div class="text-sm text-gray-400 mb-1">Service Area</div>
+                  <div class="text-xl font-semibold text-white">
+                    All of Utah
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center shrink-0"
+                >
+                  <Clock class="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <div class="text-sm text-gray-400 mb-1">Business Hours</div>
+                  <div class="text-white space-y-1">
+                    <div>Mon-Fri: 8:00 AM - 6:00 PM</div>
+                    <div>Saturday: 9:00 AM - 3:00 PM</div>
+                    <div>Sunday: Closed</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Response -->
+          <div
+            class="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl p-8 text-white"
+          >
+            <h3 class="text-2xl font-bold mb-4 font-inter">
+              Quick Response Guarantee
+            </h3>
+            <p class="text-white/90 mb-4">
+              We understand that home repairs can't always wait. That's why we
+              guarantee a response to all inquiries within 24 hours.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                Free estimates on all projects
+              </li>
+              <li class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                Same-day service available
+              </li>
+              <li class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                Emergency repairs handled promptly
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
+          Serving <span class="text-orange-500">All of Utah</span>
+        </h2>
+        <p class="text-xl text-gray-400">
+          Professional handyman services available throughout the state
+        </p>
+      </div>
+
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
+      >
+        {
+          [
+            "Salt Lake City",
+            "Provo",
+            "West Valley City",
+            "West Jordan",
+            "Orem",
+            "Sandy",
+            "Ogden",
+            "St. George",
+            "Layton",
+            "South Jordan",
+            "Millcreek",
+            "Taylorsville",
+          ].map((city) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-lg p-4 text-center hover:border-orange-500/50 transition-all">
+              <span class="text-white font-medium">{city}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupContact() {
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+
+    if (form) {
+      // Remove old listeners to be safe, though purely creating new function scope usually suffices if elements are replaced
+      // But creating a named handler helps if we needed strict cleanup.
+      // Since specific elements are replaced on navigation, simple re-add matches Astro pattern.
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // In a real application, you would send this data to a server
+        alert(
+          "Thank you for your message! We will get back to you within 24 hours."
+        );
+        form.reset();
+      });
+    }
+  }
+
+  setupContact();
+  document.addEventListener("astro:page-load", setupContact);
+</script>

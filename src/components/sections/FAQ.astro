@@ -1,0 +1,210 @@
+---
+import { Plus, Minus } from "@lucide/astro";
+
+const { faqs = [] } = Astro.props;
+
+const defaultFaqs = [
+  {
+    question: "What areas do you serve in Utah?",
+    answer:
+      "We provide handyman services throughout Utah, including Salt Lake City, Provo, Ogden, Sandy, West Valley City, and surrounding areas. Contact us to confirm service availability in your specific location.",
+  },
+  {
+    question: "How quickly can you respond to service requests?",
+    answer:
+      "We guarantee a response within 24 hours for all inquiries. For urgent repairs, we offer same-day service when available. Emergency services can often be scheduled within a few hours.",
+  },
+  {
+    question: "Are you licensed and insured?",
+    answer:
+      "Yes, Johnny Pro Handyman Services is fully licensed and insured. We carry comprehensive liability insurance to protect both our clients and our team during all projects.",
+  },
+  {
+    question: "Do you provide free estimates?",
+    answer:
+      "Absolutely! We offer free, no-obligation estimates for all projects. We'll assess your needs, discuss options, and provide a detailed quote before any work begins.",
+  },
+  {
+    question: "What types of payment do you accept?",
+    answer:
+      "We accept various payment methods including cash, checks, credit cards, and digital payments. Payment is typically due upon completion of the work, and we'll provide a detailed invoice.",
+  },
+  {
+    question: "What is your warranty policy?",
+    answer:
+      "We stand behind our work with a satisfaction guarantee. If you're not completely satisfied with our service, we'll make it right. Specific warranties vary by project type and will be discussed upfront.",
+  },
+  {
+    question: "Can you handle both small repairs and large projects?",
+    answer:
+      "Yes! We handle everything from minor repairs like fixing a leaky faucet to larger projects like complete room renovations. No job is too small or too large for our team.",
+  },
+  {
+    question: "Do I need to provide materials, or do you supply them?",
+    answer:
+      "We can work either way! We're happy to use materials you've purchased, or we can source quality materials for you. We'll discuss the best approach during your estimate.",
+  },
+];
+
+const faqList = faqs.length > 0 ? faqs : defaultFaqs;
+---
+
+<section class="py-20 bg-black">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16" data-animate-faq-header>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
+        Frequently Asked <span class="text-orange-500">Questions</span>
+      </h2>
+      <p class="text-xl text-gray-400">
+        Get answers to common questions about our handyman services
+      </p>
+    </div>
+
+    <div class="space-y-4" data-faq-container>
+      {
+        faqList.map((faq, index) => (
+          <div
+            class="bg-gray-900/50 border border-white/10 rounded-xl overflow-hidden hover:border-orange-500/50 transition-all"
+            data-faq-item
+            data-index={index}
+          >
+            <button
+              class="w-full px-6 py-5 flex items-center justify-between text-left group"
+              data-faq-button
+              aria-expanded="false"
+            >
+              <span class="text-lg font-semibold text-white group-hover:text-orange-500 transition-colors pr-4">
+                {faq.question}
+              </span>
+              <div class="shrink-0">
+                <Plus
+                  class="w-6 h-6 text-orange-500 transition-transform"
+                  data-icon-plus
+                />
+                <Minus
+                  class="w-6 h-6 text-orange-500 hidden transition-transform"
+                  data-icon-minus
+                />
+              </div>
+            </button>
+
+            <div
+              class="overflow-hidden transition-all duration-300 max-h-0"
+              data-faq-answer
+            >
+              <div class="px-6 pb-5 text-gray-300 leading-relaxed">
+                {faq.answer}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  function setupFAQ() {
+    const container = document.querySelector("[data-faq-container]");
+    const header = document.querySelector("[data-animate-faq-header]");
+
+    if (!container || !header) return;
+
+    const items = container.querySelectorAll("[data-faq-item]");
+
+    // Setup toggle logic
+    items.forEach((item) => {
+      const button = item.querySelector("[data-faq-button]");
+      const answer = item.querySelector("[data-faq-answer]");
+      const iconPlus = item.querySelector("[data-icon-plus]");
+      const iconMinus = item.querySelector("[data-icon-minus]");
+
+      if (!button || !answer || !iconPlus || !iconMinus) return;
+
+      button.addEventListener("click", () => {
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+
+        // Close all other items
+        items.forEach((otherItem) => {
+          if (otherItem !== item) {
+            const otherButton = otherItem.querySelector("[data-faq-button]");
+            const otherAnswer = otherItem.querySelector("[data-faq-answer]");
+            const otherIconPlus = otherItem.querySelector("[data-icon-plus]");
+            const otherIconMinus = otherItem.querySelector("[data-icon-minus]");
+
+            if (otherButton && otherAnswer && otherIconPlus && otherIconMinus) {
+              otherButton.setAttribute("aria-expanded", "false");
+              gsap.to(otherAnswer, {
+                maxHeight: 0,
+                duration: 0.3,
+                ease: "power2.inOut",
+              });
+              otherIconPlus.classList.remove("hidden");
+              otherIconMinus.classList.add("hidden");
+            }
+          }
+        });
+
+        // Toggle current item
+        if (isOpen) {
+          button.setAttribute("aria-expanded", "false");
+          gsap.to(answer, {
+            maxHeight: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+          iconPlus.classList.remove("hidden");
+          iconMinus.classList.add("hidden");
+        } else {
+          button.setAttribute("aria-expanded", "true");
+          gsap.to(answer, {
+            maxHeight: answer.scrollHeight,
+            duration: 0.3,
+            ease: "power2.inOut",
+          });
+          iconPlus.classList.add("hidden");
+          iconMinus.classList.remove("hidden");
+        }
+      });
+    });
+
+    // Set initial state for animations
+    gsap.set(header, { opacity: 0, y: 40 });
+    gsap.set(items, { opacity: 0, y: 30 });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.to(header, {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+            });
+
+            gsap.to(items, {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power3.out",
+              delay: 0.2,
+            });
+
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(header);
+  }
+
+  setupFAQ();
+  document.addEventListener("astro:page-load", setupFAQ);
+</script>

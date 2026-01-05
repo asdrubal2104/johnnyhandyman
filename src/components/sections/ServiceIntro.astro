@@ -1,0 +1,140 @@
+---
+import { CheckCircle2, Star } from "@lucide/astro";
+
+interface Props {
+  title: string;
+  description: string;
+  icon?: any;
+  benefits?: string[];
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  icon: Icon,
+  benefits = [],
+  image = "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?auto=format&fit=crop&q=80&w=1200",
+} = Astro.props;
+---
+
+<section
+  class="py-12 md:py-20 bg-linear-to-b from-gray-900 to-black service-intro-section"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div data-animate-service-content>
+        {
+          Icon && (
+            <div class="w-20 h-20 bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20">
+              <Icon class="w-10 h-10 text-white" />
+            </div>
+          )
+        }
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 font-inter">
+          {title}
+        </h1>
+
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">
+          {description}
+        </p>
+
+        {
+          benefits.length > 0 && (
+            <div class="space-y-4 mb-8">
+              {benefits.map((benefit) => (
+                <div class="flex items-start gap-3">
+                  <CheckCircle2 class="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                  <span class="text-gray-300 text-lg">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          )
+        }
+
+        <div class="flex items-center gap-6 pt-4 border-t border-white/10">
+          <div class="flex items-center gap-2">
+            <div class="flex">
+              {
+                Array.from({ length: 5 }).map(() => (
+                  <Star class="w-5 h-5 text-orange-500 fill-orange-500" />
+                ))
+              }
+            </div>
+            <span class="text-white font-semibold">5.0</span>
+          </div>
+          <div class="text-gray-400">Rated by 500+ satisfied customers</div>
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="relative mt-8 lg:mt-0" data-animate-service-image>
+        <div
+          class="aspect-square rounded-2xl overflow-hidden border-4 border-orange-500/20 shadow-2xl"
+        >
+          <img src={image} alt={title} class="w-full h-full object-cover" />
+        </div>
+
+        <!-- Floating badge -->
+        <div
+          class="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-orange-500 text-white p-4 md:p-6 rounded-xl shadow-2xl"
+        >
+          <div class="text-3xl font-bold">15+</div>
+          <div class="text-sm">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  function setupServiceIntro() {
+    const sections = document.querySelectorAll(".service-intro-section");
+
+    sections.forEach((section) => {
+      const content = section.querySelector("[data-animate-service-content]");
+      const image = section.querySelector("[data-animate-service-image]");
+
+      if (!content || !image) return;
+
+      // Initial state
+      gsap.set(content, { opacity: 0, x: -60 });
+      gsap.set(image, { opacity: 0, x: 60 });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              gsap.to(content, {
+                x: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+              });
+
+              gsap.to(image, {
+                x: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.2,
+              });
+
+              observer.unobserve(section);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(section);
+    });
+  }
+
+  setupServiceIntro();
+  document.addEventListener("astro:page-load", setupServiceIntro);
+</script>

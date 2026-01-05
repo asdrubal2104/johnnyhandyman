@@ -1,0 +1,162 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServiceIntro from "@/components/sections/ServiceIntro.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { Zap, CheckCircle2, Shield, Clock } from "@lucide/astro";
+import ElectricalFixesImage from "@/assets/Electrical_service.webp";
+
+const benefits = [
+  "Licensed electrician services",
+  "Outlet and switch installation",
+  "Light fixture installation",
+  "Electrical troubleshooting",
+  "Safety inspections",
+  "Code-compliant work",
+];
+
+const faqs = [
+  {
+    question: "Are you a licensed electrician?",
+    answer:
+      "Yes, we are fully licensed and insured to perform electrical work in Utah. All work is done to code and inspected when required.",
+  },
+  {
+    question: "What electrical services do you offer?",
+    answer:
+      "We handle outlet installation, switch replacement, light fixture installation, ceiling fan installation, GFCI installation, and minor electrical repairs.",
+  },
+  {
+    question: "Is electrical work dangerous?",
+    answer:
+      "Electrical work can be dangerous if not done properly. That's why we always follow safety protocols and electrical codes to ensure safe, reliable installations.",
+  },
+  {
+    question: "Do you offer emergency electrical services?",
+    answer:
+      "Yes, we offer same-day service for urgent electrical issues. Contact us immediately if you're experiencing electrical problems.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Electrical Services in Utah | Licensed Electrician"
+  description="Expert electrical repair and installation in Utah. Outlets, switches, lighting, and more. Licensed, insured, and code-compliant. Free estimates available."
+>
+  <SchemaService
+    serviceName="Electrical Services"
+    serviceType="Electrical Installation and Repair"
+    description="Professional electrical services including outlet installation, light fixtures, switches, and electrical repairs throughout Utah."
+  />
+
+  <Breadcrumbs />
+
+  <ServiceIntro
+    title="Professional Electrical Services"
+    description="Safe, reliable electrical work for your home. From installing new outlets to replacing light fixtures, our licensed electricians ensure all work meets code and safety standards."
+    icon={Zap}
+    benefits={benefits}
+    image={ElectricalFixesImage.src}
+  />
+
+  <!-- Services Details -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Electrical <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              title: "Outlet Installation",
+              description:
+                "Install new outlets, replace old ones, or upgrade to GFCI outlets for safety.",
+              icon: Zap,
+            },
+            {
+              title: "Light Fixtures",
+              description:
+                "Install or replace interior and exterior light fixtures, including recessed lighting.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Switch Replacement",
+              description:
+                "Replace old switches, install dimmer switches, or add new switch locations.",
+              icon: Zap,
+            },
+            {
+              title: "Ceiling Fans",
+              description:
+                "Professional ceiling fan installation and balancing for optimal performance.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Safety Inspections",
+              description:
+                "Electrical safety inspections to identify potential hazards and code violations.",
+              icon: Shield,
+            },
+            {
+              title: "Fast Service",
+              description:
+                "Same-day service available for urgent electrical needs and repairs.",
+              icon: Clock,
+            },
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-white" />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {service.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety Section -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Safety <span class="text-orange-500">First</span>
+      </h2>
+
+      <div class="bg-gray-900/50 border border-orange-500/50 rounded-2xl p-8">
+        <p class="text-xl text-gray-300 leading-relaxed mb-6">
+          Electrical work requires expertise and strict adherence to safety
+          codes. Our licensed electricians:
+        </p>
+
+        <ul class="space-y-4">
+          {
+            [
+              "Follow all local and national electrical codes",
+              "Use proper safety equipment and procedures",
+              "Test all work to ensure safe operation",
+              "Provide code-compliant installations",
+              "Carry comprehensive liability insurance",
+              "Offer warranties on all electrical work",
+            ].map((item) => (
+              <li class="flex items-start gap-3">
+                <Shield class="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                <span class="text-gray-300 text-lg">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <CTA />
+</BaseLayout>

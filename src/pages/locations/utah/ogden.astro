@@ -1,0 +1,76 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LocationIntro from "@/components/sections/LocationIntro.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import OgdenImage from "@/assets/locations/Ogden_city.webp";
+
+const neighborhoods = [
+  "Downtown Ogden",
+  "East Bench",
+  "West Ogden",
+  "North Ogden",
+  "South Ogden",
+  "Marriott-Slaterville",
+];
+---
+
+<BaseLayout
+  title="Handyman Services in Ogden, Utah | Johnny Pro"
+  description="Professional handyman services in Ogden. Drywall, plumbing, electrical, painting, and more. Serving all Ogden areas. Free estimates available."
+>
+  <SchemaLocal
+    businessName="Johnny Pro Handyman Services - Ogden"
+    address={{
+      streetAddress: "",
+      addressLocality: "Ogden",
+      addressRegion: "UT",
+      postalCode: "84401",
+      addressCountry: "US",
+    }}
+    geo={{
+      latitude: "41.2230",
+      longitude: "-111.9738",
+    }}
+  />
+
+  <Breadcrumbs />
+
+  <LocationIntro
+    city="Ogden"
+    state="Utah"
+    description="Quality handyman services for Ogden homeowners. From historic downtown properties to modern suburban homes, we provide expert repairs and maintenance."
+    neighborhoods={neighborhoods}
+    image={OgdenImage}
+  />
+
+  <!-- Local Service Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Serving Ogden with <span class="text-orange-500">Excellence</span>
+      </h2>
+
+      <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+        <p>
+          Ogden's unique blend of historic architecture and modern development
+          requires a handyman who understands both. We've worked on everything
+          from century-old homes on Historic 25th Street to new construction in
+          the growing suburbs.
+        </p>
+        <p>
+          Our team knows the challenges of maintaining homes in Ogden's climate
+          and terrain. Whether you need repairs from winter weather damage or
+          upgrades to improve your home's efficiency, we're here to help.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ServicesList />
+  <FAQ />
+  <CTA />
+</BaseLayout>

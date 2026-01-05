@@ -1,0 +1,248 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { Hammer, Droplet, Zap, Home } from "@lucide/astro";
+import HeroImage1 from "@/assets/Maintenance_home.webp";
+import HeroImage2 from "@/assets/Plumbing_Services.webp";
+import HeroImage3 from "@/assets/Drywall_repair.webp";
+interface Slide {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Feature {
+  icon: any;
+  label: string;
+}
+
+const slides: Slide[] = [
+  {
+    src: HeroImage1,
+    alt: "Professional Home Maintenance Services",
+  },
+  {
+    src: HeroImage2,
+    alt: "Expert Plumbing and Repair Services",
+  },
+  {
+    src: HeroImage3,
+    alt: "Professional Drywall Installation and Repair",
+  },
+];
+
+const features: Feature[] = [
+  { icon: Hammer, label: "Drywall" },
+  { icon: Droplet, label: "Plumbing" },
+  { icon: Zap, label: "Electrical" },
+  { icon: Home, label: "Maintenance" },
+];
+---
+
+<section
+  id="hero"
+  data-hero-container
+  class="relative w-full min-h-[90vh] md:h-[800px] text-white overflow-hidden"
+>
+  <div class="absolute inset-0 z-0">
+    {
+      slides.map((slide, i) => (
+        <Image
+          src={slide.src}
+          alt={slide.alt}
+          data-hero-slide
+          class={`absolute inset-0 w-full h-full object-cover ${i === 0 ? "opacity-100" : "opacity-0"}`}
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+      ))
+    }
+    <div class="absolute inset-0 bg-black/50"></div>
+  </div>
+
+  <div
+    class="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-12 text-center pt-20"
+  >
+    <div class="max-w-4xl space-y-8">
+      <h1
+        data-animate-title
+        class="text-4xl sm:text-5xl md:text-7xl font-bold font-inter leading-tight tracking-tight"
+      >
+        Trusted Handyman Services <span class="text-orange-500">in Utah</span>
+      </h1>
+
+      <p
+        data-animate-subtitle
+        class="text-xl md:text-2xl font-roboto max-w-2xl mx-auto text-gray-200"
+      >
+        Professional home repairs and maintenance for apartments and houses.
+      </p>
+
+      <div
+        data-animate-cta
+        class="flex flex-col sm:flex-row gap-4 justify-center pt-4 w-full sm:w-auto px-4 sm:px-0"
+      >
+        <a
+          href="/contact"
+          class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white py-4 px-10 rounded-xl font-semibold shadow-lg transition-all hover:scale-105 active:scale-95 text-center"
+        >
+          Request a Free Quote
+        </a>
+        <a
+          href="/services"
+          class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white py-4 px-10 rounded-xl font-semibold transition-all hover:border-white text-center"
+        >
+          View Services
+        </a>
+      </div>
+
+      <div data-animate-icons class="flex flex-wrap gap-6 pt-8 justify-center">
+        {
+          features.map(({ icon: Icon, label }) => (
+            <div class="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+              <Icon class="w-5 h-5 text-orange-500" />
+              <span class="font-roboto font-medium text-sm md:text-base">
+                {label}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+    {
+      slides.map((_, i) => (
+        <button
+          data-hero-dot
+          data-index={i}
+          class={`w-3 h-3 rounded-full transition-all duration-300 ${i === 0 ? "bg-white scale-125" : "bg-white/40 hover:bg-white/60"}`}
+          aria-label={`Go to slide ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  function setupHero() {
+    const containers = document.querySelectorAll("[data-hero-container]");
+
+    containers.forEach((container) => {
+      // Cleanup previous instances if any
+      const existingInterval = (container as any)._heroInterval;
+      if (existingInterval) clearInterval(existingInterval);
+
+      const slides = container.querySelectorAll(
+        "[data-hero-slide]"
+      ) as NodeListOf<HTMLElement>;
+      const dots = container.querySelectorAll(
+        "[data-hero-dot]"
+      ) as NodeListOf<HTMLElement>;
+      const title = container.querySelector(
+        "[data-animate-title]"
+      ) as HTMLElement;
+      const subtitle = container.querySelector(
+        "[data-animate-subtitle]"
+      ) as HTMLElement;
+      const ctas = container.querySelector("[data-animate-cta]") as HTMLElement;
+      const icons = container.querySelectorAll(
+        "[data-animate-icons] > div"
+      ) as NodeListOf<HTMLElement>;
+
+      if (slides.length === 0) return;
+
+      // Initial state setup to prevent "flash" or incorrect "from" calculations
+      gsap.killTweensOf([title, subtitle, ctas, ...Array.from(icons)]);
+      gsap.set([title, subtitle, ctas], { opacity: 0, y: 30 });
+      gsap.set(icons, { opacity: 0, y: 20 });
+
+      // Animation Timeline
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 1 },
+      });
+
+      tl.to(title, { y: 0, opacity: 1, delay: 0.2 })
+        .to(subtitle, { y: 0, opacity: 1 }, "-=0.7")
+        .to(ctas, { y: 0, opacity: 1 }, "-=0.7")
+        .to(icons, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.5");
+
+      let current = 0;
+      const total = slides.length;
+      let interval: ReturnType<typeof setInterval> | undefined;
+
+      function goToSlide(slideIndex: number) {
+        if (slideIndex === current) return;
+
+        const prev = current;
+        current = slideIndex;
+
+        gsap.to(slides[prev], { opacity: 0, scale: 1.05, duration: 1.5 });
+        gsap.fromTo(
+          slides[current],
+          { opacity: 0, scale: 1.1 },
+          { opacity: 1, scale: 1, duration: 2, ease: "power2.out" }
+        );
+
+        // Update dots UI
+        dots.forEach((dot, idx) => {
+          if (idx === current) {
+            dot.classList.remove("bg-white/40", "bg-white/60");
+            dot.classList.add("bg-white", "scale-125");
+          } else {
+            dot.classList.remove("bg-white", "scale-125");
+            dot.classList.add("bg-white/40");
+          }
+        });
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        if (total <= 1) return;
+        interval = setInterval(() => {
+          goToSlide((current + 1) % total);
+        }, 7000);
+        (container as any)._heroInterval = interval;
+      }
+
+      function stopAutoplay() {
+        if (interval) {
+          clearInterval(interval);
+          interval = undefined;
+          (container as any)._heroInterval = undefined;
+        }
+      }
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener("click", () => {
+          goToSlide(idx);
+          startAutoplay(); // Reset timer
+        });
+      });
+
+      // Ensure first slide is set up correctly
+      gsap.set(slides[0], { opacity: 1, scale: 1 });
+      slides.forEach((slide, i) => {
+        if (i !== 0) gsap.set(slide, { opacity: 0 });
+      });
+
+      startAutoplay();
+    });
+  }
+
+  // Run on initial load
+  setupHero();
+
+  // Run on view transitions navigation
+  document.addEventListener("astro:page-load", setupHero);
+
+  // Cleanup on page swap to prevent memory leaks
+  document.addEventListener("astro:before-swap", () => {
+    const containers = document.querySelectorAll("[data-hero-container]");
+    containers.forEach((container) => {
+      const interval = (container as any)._heroInterval;
+      if (interval) clearInterval(interval);
+    });
+  });
+</script>

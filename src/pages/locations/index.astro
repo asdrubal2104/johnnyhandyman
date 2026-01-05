@@ -1,0 +1,233 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { Image } from "astro:assets";
+import { MapPin, Phone, Star } from "@lucide/astro";
+import OgdenImage from "@/assets/locations/Ogden_city.webp";
+import ProvoImage from "@/assets/locations/Provo_downtown.webp";
+import SaltLakeCityImage from "@/assets/locations/salt_lake_city.webp";
+import SandyImage from "@/assets/locations/Sandy_city.webp";
+
+const locations = [
+  {
+    city: "Salt Lake City",
+    slug: "salt-lake-city",
+    description:
+      "Professional handyman services in Salt Lake City and surrounding areas.",
+    image: SaltLakeCityImage,
+  },
+  {
+    city: "Provo",
+    slug: "provo",
+    description:
+      "Trusted handyman services for Provo and Utah County residents.",
+    image: ProvoImage,
+  },
+  {
+    city: "Ogden",
+    slug: "ogden",
+    description: "Quality handyman services throughout Ogden and Weber County.",
+    image: OgdenImage,
+  },
+  {
+    city: "Sandy",
+    slug: "sandy",
+    description:
+      "Reliable handyman services for Sandy and South Valley communities.",
+    image: SandyImage,
+  },
+];
+---
+
+<BaseLayout
+  title="Service Locations in Utah | Johnny Pro Handyman Services"
+  description="Johnny Pro Handyman Services serves communities throughout Utah including Salt Lake City, Provo, Ogden, Sandy, and more. Find your local handyman."
+>
+  <SchemaLocal />
+  <Breadcrumbs />
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-linear-to-b from-gray-900 to-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div
+        class="w-20 h-20 bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20 mx-auto"
+      >
+        <MapPin class="w-10 h-10 text-white" />
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
+        Service <span class="text-orange-500">Locations</span>
+      </h1>
+
+      <p class="text-xl text-gray-300 leading-relaxed mb-8">
+        Proudly serving communities throughout Utah with professional handyman
+        services. Find your local area below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Locations Grid -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {
+          locations.map((location) => (
+            <a
+              href={`/locations/utah/${location.slug}`}
+              class="group bg-gray-900/50 border border-white/10 rounded-2xl overflow-hidden hover:border-orange-500/50 transition-all hover:shadow-2xl hover:shadow-orange-500/10"
+            >
+              <div class="aspect-video overflow-hidden">
+                <Image
+                  src={location.image}
+                  alt={`Handyman services in ${location.city}`}
+                  class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <div class="p-6">
+                <h2 class="text-2xl font-bold text-white mb-3 font-inter group-hover:text-orange-500 transition-colors">
+                  {location.city}, Utah
+                </h2>
+                <p class="text-gray-400 mb-4">{location.description}</p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2 text-orange-500">
+                    <span class="font-semibold">View Services</span>
+                    <svg
+                      class="w-5 h-5 transform group-hover:translate-x-2 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <Star class="w-5 h-5 text-orange-500 fill-orange-500" />
+                    <span class="text-white font-semibold">5.0</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Coverage Area -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-white mb-4 font-inter">
+          Serving <span class="text-orange-500">All of Utah</span>
+        </h2>
+        <p class="text-xl text-gray-400">
+          We provide professional handyman services throughout the state
+        </p>
+      </div>
+
+      <div
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
+      >
+        {
+          [
+            "Salt Lake City",
+            "Provo",
+            "West Valley City",
+            "West Jordan",
+            "Orem",
+            "Sandy",
+            "Ogden",
+            "St. George",
+            "Layton",
+            "South Jordan",
+            "Millcreek",
+            "Taylorsville",
+            "Lehi",
+            "Logan",
+            "Murray",
+            "Draper",
+            "Bountiful",
+            "Riverton",
+            "Roy",
+            "Spanish Fork",
+          ].map((city) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-lg p-4 text-center hover:border-orange-500/50 transition-all">
+              <span class="text-white font-medium">{city}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-12">
+        <p class="text-lg text-gray-400 mb-6">
+          Don't see your city? Contact us to confirm service availability in
+          your area.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+          >
+            Get Free Quote
+          </a>
+          <a
+            href="tel:+18015551234"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all"
+          >
+            <Phone class="w-5 h-5" />
+            (801) 555-1234
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Local -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Why Choose a <span class="text-orange-500">Local Handyman</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          [
+            {
+              title: "Fast Response Times",
+              description:
+                "Being local means we can respond quickly to your service requests and emergencies.",
+            },
+            {
+              title: "Local Expertise",
+              description:
+                "We understand Utah's unique climate, building codes, and home maintenance needs.",
+            },
+            {
+              title: "Community Focused",
+              description:
+                "We're invested in our community and build lasting relationships with our clients.",
+            },
+            {
+              title: "Reliable Service",
+              description:
+                "Our reputation in the community depends on quality work and customer satisfaction.",
+            },
+          ].map((benefit) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6">
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {benefit.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{benefit.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

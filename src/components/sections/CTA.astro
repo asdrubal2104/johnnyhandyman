@@ -1,0 +1,190 @@
+---
+import { Phone, ArrowRight } from "@lucide/astro";
+---
+
+<section class="relative py-24 overflow-hidden cta-section">
+  <!-- Background with gradient -->
+  <div class="absolute inset-0 bg-linear-to-br from-orange-600 to-orange-500">
+  </div>
+
+  <!-- Decorative elements -->
+  <div class="absolute inset-0 opacity-10">
+    <div
+      class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content -->
+      <div class="text-white" data-animate-content>
+        <h2
+          class="text-4xl md:text-5xl font-bold mb-6 font-inter leading-tight"
+        >
+          Ready to Get Started?
+        </h2>
+        <p class="text-xl mb-8 text-white/90 leading-relaxed">
+          Get a free, no-obligation quote for your project. Johnny Pro Handyman
+          Services is here to help with all your home repair and maintenance
+          needs across Utah.
+        </p>
+
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start gap-3">
+            <div
+              class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0 mt-1"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span class="text-lg">Free estimates on all projects</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div
+              class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0 mt-1"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span class="text-lg">Licensed and insured professional</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div
+              class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0 mt-1"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span class="text-lg">Same-day service available</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div
+              class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center shrink-0 mt-1"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <span class="text-lg">100% satisfaction guaranteed</span>
+          </li>
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95 group"
+          >
+            Get Free Quote
+            <ArrowRight
+              class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+            />
+          </a>
+          <a
+            href="tel:+18015551234"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+          >
+            <Phone class="w-5 h-5" />
+            (801) 555-1234
+          </a>
+        </div>
+      </div>
+
+      <!-- Image/Stats -->
+      <div class="relative" data-animate-image>
+        <div
+          class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-2xl"
+        >
+          <div class="grid grid-cols-2 gap-6">
+            <div class="text-center p-6 bg-white/10 rounded-xl">
+              <div class="text-5xl font-bold mb-2">15+</div>
+              <div class="text-white/80">Years Experience</div>
+            </div>
+            <div class="text-center p-6 bg-white/10 rounded-xl">
+              <div class="text-5xl font-bold mb-2">500+</div>
+              <div class="text-white/80">Happy Clients</div>
+            </div>
+            <div class="text-center p-6 bg-white/10 rounded-xl">
+              <div class="text-5xl font-bold mb-2">100+</div>
+              <div class="text-white/80">Projects Done</div>
+            </div>
+            <div class="text-center p-6 bg-white/10 rounded-xl">
+              <div class="text-5xl font-bold mb-2">5★</div>
+              <div class="text-white/80">Average Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  function setupCTAAnimation() {
+    const ctas = document.querySelectorAll(".cta-section");
+
+    ctas.forEach((cta) => {
+      const content = cta.querySelector("[data-animate-content]");
+      const image = cta.querySelector("[data-animate-image]");
+
+      if (!content || !image) return;
+
+      // Set initial state
+      gsap.set(content, { opacity: 0, x: -60 });
+      gsap.set(image, { opacity: 0, x: 60 });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Animate to visible
+              gsap.to(content, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out",
+              });
+
+              gsap.to(image, {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.2,
+              });
+
+              observer.unobserve(cta);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      observer.observe(cta);
+    });
+  }
+
+  setupCTAAnimation();
+  document.addEventListener("astro:page-load", setupCTAAnimation);
+</script>

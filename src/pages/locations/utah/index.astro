@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { MapPin } from "@lucide/astro";
+
+const cities = [
+  { name: "Salt Lake City", slug: "salt-lake-city" },
+  { name: "Provo", slug: "provo" },
+  { name: "Ogden", slug: "ogden" },
+  { name: "Sandy", slug: "sandy" },
+];
+---
+
+<BaseLayout
+  title="Utah Handyman Services | Johnny Pro Service Areas"
+  description="Professional handyman services throughout Utah. Serving Salt Lake City, Provo, Ogden, Sandy, and surrounding communities."
+>
+  <SchemaLocal />
+  <Breadcrumbs />
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-linear-to-b from-gray-900 to-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div
+        class="w-20 h-20 bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20 mx-auto"
+      >
+        <MapPin class="w-10 h-10 text-white" />
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
+        Serving <span class="text-orange-500">Utah</span>
+      </h1>
+
+      <p class="text-xl text-gray-300 leading-relaxed">
+        Professional handyman services throughout the state of Utah. Select your
+        city to learn more about our local services.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cities List -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          cities.map((city) => (
+            <a
+              href={`/locations/utah/${city.slug}`}
+              class="group bg-gray-900/50 border border-white/10 rounded-xl p-8 hover:border-orange-500/50 transition-all hover:shadow-xl"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-2xl font-bold text-white mb-2 font-inter group-hover:text-orange-500 transition-colors">
+                    {city.name}
+                  </h2>
+                  <p class="text-gray-400">View Services →</p>
+                </div>
+                <MapPin class="w-8 h-8 text-orange-500" />
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

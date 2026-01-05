@@ -1,0 +1,77 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LocationIntro from "@/components/sections/LocationIntro.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import ProvoImage from "@/assets/locations/Provo_downtown.webp";
+
+const neighborhoods = [
+  "Downtown Provo",
+  "Grandview",
+  "Sunset",
+  "Joaquin",
+  "Lakewood",
+  "Sherwood Hills",
+];
+---
+
+<BaseLayout
+  title="Handyman Services in Provo, Utah | Johnny Pro"
+  description="Professional handyman services in Provo. Drywall, plumbing, electrical, painting, and more. Serving all Provo neighborhoods. Free estimates available."
+>
+  <SchemaLocal
+    businessName="Johnny Pro Handyman Services - Provo"
+    address={{
+      streetAddress: "",
+      addressLocality: "Provo",
+      addressRegion: "UT",
+      postalCode: "84601",
+      addressCountry: "US",
+    }}
+    geo={{
+      latitude: "40.2338",
+      longitude: "-111.6585",
+    }}
+  />
+
+  <Breadcrumbs />
+
+  <LocationIntro
+    city="Provo"
+    state="Utah"
+    description="Trusted handyman services for Provo homeowners. We handle everything from minor repairs to major home improvements with professionalism and expertise."
+    neighborhoods={neighborhoods}
+    image={ProvoImage}
+  />
+
+  <!-- Local Expertise Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Provo's Trusted <span class="text-orange-500">Handyman</span>
+      </h2>
+
+      <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+        <p>
+          Serving Provo and Utah County for over 15 years, we've become the
+          go-to handyman service for homeowners who demand quality and
+          reliability. Our local knowledge and expertise make us uniquely
+          qualified to handle your home repair needs.
+        </p>
+        <p>
+          From student housing near BYU to family homes in the neighborhoods, we
+          understand the diverse needs of Provo residents. We're committed to
+          providing fast, affordable, and professional service to every
+          customer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ServicesList />
+  <FAQ />
+  <CTA />
+</BaseLayout>

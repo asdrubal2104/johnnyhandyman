@@ -1,0 +1,35 @@
+---
+const { title, description, canonical, ogImage } = Astro.props;
+
+const siteUrl = "https://johnnypro.com";
+const finalCanonical =
+  canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const finalOgImage = ogImage ?? `${siteUrl}/images/og-default.jpg`;
+---
+
+<title>{title}</title>
+
+<meta name="description" content={description} />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#f97316" />
+
+<link rel="canonical" href={finalCanonical} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={finalCanonical} />
+<meta property="og:image" content={finalOgImage} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content="Johnny Pro Handyman" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={finalOgImage} />
+
+<meta name="robots" content="index, follow" />

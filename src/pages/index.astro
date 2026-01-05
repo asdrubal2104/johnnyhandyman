@@ -1,11 +1,19 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroSimple from "@/components/sections/HeroSimple.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Johnny Pro Handyman Services Utah | Professional Home Repairs & Maintenance"
+  description="Expert handyman services in Utah. Drywall, plumbing, electrical, painting, carpentry & more. Licensed, insured, and trusted by 500+ homeowners. Free quotes available."
+>
+  <SchemaLocal />
+  <HeroSimple />
+  <ServicesList />
+  <FAQ />
+  <CTA />
+</BaseLayout>

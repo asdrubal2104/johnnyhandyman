@@ -1,0 +1,85 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LocationIntro from "@/components/sections/LocationIntro.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import SaltLakeCityImage from "@/assets/locations/salt_lake_city.webp";
+
+const neighborhoods = [
+  "Downtown Salt Lake",
+  "Sugar House",
+  "The Avenues",
+  "Capitol Hill",
+  "Liberty Wells",
+  "Rose Park",
+  "Glendale",
+  "Poplar Grove",
+];
+---
+
+<BaseLayout
+  title="Handyman Services in Salt Lake City, Utah | Johnny Pro"
+  description="Professional handyman services in Salt Lake City. Drywall, plumbing, electrical, painting, and more. Serving all SLC neighborhoods. Free estimates."
+>
+  <SchemaLocal
+    businessName="Johnny Pro Handyman Services - Salt Lake City"
+    address={{
+      streetAddress: "",
+      addressLocality: "Salt Lake City",
+      addressRegion: "UT",
+      postalCode: "84101",
+      addressCountry: "US",
+    }}
+    geo={{
+      latitude: "40.7608",
+      longitude: "-111.8910",
+    }}
+  />
+
+  <Breadcrumbs />
+
+  <LocationIntro
+    city="Salt Lake City"
+    state="Utah"
+    description="Serving Salt Lake City and surrounding areas with professional handyman services. From downtown to the suburbs, we're your trusted local handyman for all home repairs and improvements."
+    neighborhoods={neighborhoods}
+    image={SaltLakeCityImage}
+  />
+
+  <!-- Why Choose Us Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Why Salt Lake City Chooses <span class="text-orange-500"
+          >Johnny Pro</span
+        >
+      </h2>
+
+      <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+        <p>
+          As a locally-operated handyman service, we understand the unique needs
+          of Salt Lake City homeowners. From historic homes in The Avenues to
+          modern condos downtown, we've worked on properties throughout the
+          valley.
+        </p>
+        <p>
+          Our team is familiar with local building codes, weather challenges,
+          and the specific maintenance needs of Utah homes. Whether you need
+          emergency repairs or routine maintenance, we're here to help.
+        </p>
+        <p>
+          We pride ourselves on fast response times, transparent pricing, and
+          quality workmanship that Salt Lake City residents have trusted for
+          over 15 years.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ServicesList />
+  <FAQ />
+  <CTA />
+</BaseLayout>

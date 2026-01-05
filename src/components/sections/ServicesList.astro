@@ -1,0 +1,186 @@
+---
+import { Wrench, Droplet, Zap, Paintbrush, Hammer, Home } from "@lucide/astro";
+
+const services = [
+  {
+    icon: Hammer,
+    title: "Drywall Repair & Installation",
+    description: "Expert drywall repair, patching, and installation. From small holes to complete wall replacements.",
+    href: "/services/drywall-repair",
+    features: ["Hole Patching", "Texture Matching", "Full Installation", "Finishing"]
+  },
+  {
+    icon: Droplet,
+    title: "Plumbing Services",
+    description: "Reliable plumbing solutions for leaks, installations, and repairs. Quick response, quality work.",
+    href: "/services/plumbing-repair",
+    features: ["Leak Repair", "Fixture Installation", "Pipe Repair", "Drain Cleaning"]
+  },
+  {
+    icon: Zap,
+    title: "Electrical Work",
+    description: "Safe and professional electrical services. Licensed and insured for your peace of mind.",
+    href: "/services/electrical-fixes",
+    features: ["Outlet Installation", "Light Fixtures", "Switch Repair", "Wiring"]
+  },
+  {
+    icon: Paintbrush,
+    title: "Painting Services",
+    description: "Interior and exterior painting with attention to detail. Transform your space with fresh colors.",
+    href: "/services/painting-services",
+    features: ["Interior Painting", "Exterior Painting", "Trim Work", "Color Consultation"]
+  },
+  {
+    icon: Wrench,
+    title: "Carpentry & Repairs",
+    description: "Custom carpentry and repair work. Doors, cabinets, trim, and more done right.",
+    href: "/services/carpentry-repairs",
+    features: ["Door Installation", "Cabinet Repair", "Trim & Molding", "Custom Work"]
+  },
+  {
+    icon: Home,
+    title: "General Maintenance",
+    description: "Complete home maintenance services. Keep your property in top condition year-round.",
+    href: "/services/home-maintenance",
+    features: ["Preventive Care", "Seasonal Prep", "Minor Repairs", "Inspections"]
+  }
+];
+---
+
+<section class="py-20 bg-linear-to-b from-black to-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-animate-header>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
+        Our <span class="text-orange-500">Services</span>
+      </h2>
+      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+        Professional handyman services tailored to your needs. Quality workmanship guaranteed on every project.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <article 
+          class="group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2"
+          data-animate-card
+          data-index={index}
+        >
+          <!-- Icon -->
+          <div class="mb-6">
+            <div class="w-16 h-16 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-orange-500/20">
+              <service.icon class="w-8 h-8 text-white" />
+            </div>
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-2xl font-bold text-white mb-3 font-inter group-hover:text-orange-500 transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-gray-400 mb-6 leading-relaxed">
+            {service.description}
+          </p>
+
+          <!-- Features List -->
+          <ul class="space-y-2 mb-6">
+            {service.features.map((feature) => (
+              <li class="flex items-center gap-2 text-sm text-gray-300">
+                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA Link -->
+          <a 
+            href={service.href}
+            class="inline-flex items-center gap-2 text-orange-500 font-semibold hover:gap-4 transition-all group/link"
+          >
+            Learn More
+            <svg class="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <!-- Decorative gradient -->
+          <div class="absolute inset-0 bg-linear-to-br from-orange-500/0 to-orange-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-16" data-animate-cta>
+      <p class="text-gray-400 mb-6 text-lg">
+        Don't see what you need? We handle a wide variety of home repair and maintenance tasks.
+      </p>
+      <a 
+        href="/contact"
+        class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+      >
+        Request Custom Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  function setupServicesAnimation() {
+    const header = document.querySelector('[data-animate-header]');
+    const cards = document.querySelectorAll('[data-animate-card]');
+    const cta = document.querySelector('[data-animate-cta]');
+
+    if (!header || cards.length === 0) return;
+
+    // Set initial state
+    gsap.set([header, cards, cta], { opacity: 0, y: 30 });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Animate header
+            gsap.to(header, {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out"
+            });
+
+            // Animate cards with stagger
+            gsap.to(cards, {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power3.out",
+              delay: 0.2
+            });
+
+            // Animate CTA
+            if (cta) {
+              gsap.to(cta, {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.6
+              });
+            }
+
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (header) observer.observe(header);
+  }
+
+  setupServicesAnimation();
+  document.addEventListener('astro:page-load', setupServicesAnimation);
+</script>

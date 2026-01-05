@@ -1,0 +1,75 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LocationIntro from "@/components/sections/LocationIntro.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import SandyImage from "@/assets/locations/Sandy_city.webp";
+
+const neighborhoods = [
+  "Sandy City Center",
+  "Crescent View",
+  "Bell Canyon",
+  "Dimple Dell",
+  "Willow Canyon",
+  "Alta",
+];
+---
+
+<BaseLayout
+  title="Handyman Services in Sandy, Utah | Johnny Pro"
+  description="Professional handyman services in Sandy. Drywall, plumbing, electrical, painting, and more. Serving all Sandy neighborhoods. Free estimates available."
+>
+  <SchemaLocal
+    businessName="Johnny Pro Handyman Services - Sandy"
+    address={{
+      streetAddress: "",
+      addressLocality: "Sandy",
+      addressRegion: "UT",
+      postalCode: "84070",
+      addressCountry: "US",
+    }}
+    geo={{
+      latitude: "40.5649",
+      longitude: "-111.8389",
+    }}
+  />
+
+  <Breadcrumbs />
+
+  <LocationIntro
+    city="Sandy"
+    state="Utah"
+    description="Reliable handyman services for Sandy residents. We provide professional home repairs and maintenance throughout Sandy and surrounding areas."
+    neighborhoods={neighborhoods}
+    image={SandyImage}
+  />
+
+  <!-- Community Focus Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter text-center">
+        Sandy's Preferred <span class="text-orange-500">Handyman</span>
+      </h2>
+
+      <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+        <p>
+          Sandy homeowners trust Johnny Pro for all their home repair and
+          maintenance needs. We understand the unique characteristics of Sandy
+          homes, from established neighborhoods to newer developments.
+        </p>
+        <p>
+          Our commitment to quality workmanship and customer satisfaction has
+          made us the preferred choice for Sandy residents. We treat every home
+          with the care and attention it deserves.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ServicesList />
+  <FAQ />
+  <CTA />
+</BaseLayout>

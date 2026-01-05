@@ -1,0 +1,30 @@
+---
+import PageLayout from "./PageLayout.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import CTA from "@/components/sections/CTA.astro";
+
+const { title, description, serviceName, serviceArea = "Utah" } = Astro.props;
+---
+
+<PageLayout title={title} description={description}>
+  <SchemaService name={serviceName} areaServed={serviceArea} />
+
+  <article class="space-y-16">
+    <header class="max-w-3xl">
+      <h1 class="text-4xl font-bold">
+        {serviceName} in {serviceArea}
+      </h1>
+      <p class="mt-4 text-lg text-gray-600">
+        <slot name="intro" />
+      </p>
+    </header>
+
+    <!-- Contenido principal -->
+    <section class="prose max-w-none">
+      <slot />
+    </section>
+
+    <!-- CTA -->
+    <CTA />
+  </article>
+</PageLayout>

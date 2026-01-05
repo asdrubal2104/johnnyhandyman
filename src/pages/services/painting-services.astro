@@ -1,0 +1,194 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServiceIntro from "@/components/sections/ServiceIntro.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import {
+  Paintbrush,
+  Palette,
+  Home,
+  DollarSign,
+  CheckCircle2,
+} from "@lucide/astro";
+import PaintingServicesImage from "@/assets/Painting_service.webp";
+
+const benefits = [
+  "Interior & Exterior Painting",
+  "Trim & Molding Painting",
+  "Cabinet Refinishing",
+  "Deck Staining & Sealing",
+  "Wallpaper Removal",
+  "Color Consultation",
+];
+
+const faqs = [
+  {
+    question: "Do you provide the paint or do I need to buy it?",
+    answer:
+      "We can work either way! We're happy to use paint you've already purchased, or we can recommend and supply high-quality paints from trusted brands. We pass our contractor discounts on to you.",
+  },
+  {
+    question: "How do you prepare surfaces before painting?",
+    answer:
+      "Proper preparation is key to a lasting finish. We clean surfaces, patch holes, sand rough spots, protect furniture and floors, and prime where necessary before applying any paint.",
+  },
+  {
+    question: "Do you offer exterior painting services?",
+    answer:
+      "Yes, we provide comprehensive exterior painting services including siding, trim, doors, and fences. We use weather-resistant paints designed for Utah's climate.",
+  },
+  {
+    question: "Can you help with color selection?",
+    answer:
+      "Absolutely! We can provide color swatches and advice on color combinations that work well with your home's lighting and style.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Painting Services Utah | Interior & Exterior Painters"
+  description="Expert painting services in Utah. Interior, exterior, cabinets, trim, and more. Clean, professional, and detailed painters. Get a free quote today."
+>
+  <SchemaService
+    serviceName="Painting Services"
+    serviceType="House Painting"
+    description="Professional interior and exterior painting services in Utah including cabinet refinishing and deck staining."
+  />
+
+  <Breadcrumbs />
+
+  <ServiceIntro
+    title="Professional Painting Services"
+    description="Transform your home with our expert painting services. Whether you need to freshen up a single room or repaint your entire home's exterior, our skilled team delivers flawless results with meticulous attention to detail."
+    icon={Paintbrush}
+    benefits={benefits}
+    image={PaintingServicesImage.src}
+  />
+
+  <!-- Services Details -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Our Painting <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              title: "Interior Painting",
+              description:
+                "Flawless painting for walls, ceilings, and trim. We protect your furniture and floors.",
+              icon: Home,
+            },
+            {
+              title: "Exterior Painting",
+              description:
+                "Boost curb appeal with durable exterior painting for siding, stucco, and brick.",
+              icon: Paintbrush,
+            },
+            {
+              title: "Cabinet Refinishing",
+              description:
+                "Update your kitchen or bathroom with professional cabinet painting and refinishing.",
+              icon: Palette,
+            },
+            {
+              title: "Deck Staining",
+              description:
+                "Protect and beautify your deck with high-quality staining and sealing services.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Color Consultation",
+              description:
+                "Expert advice on color selection to match your style and lighting.",
+              icon: Palette,
+            },
+            {
+              title: "Affordable Pricing",
+              description:
+                "Competitive rates with transparent pricing and no hidden fees.",
+              icon: DollarSign,
+            },
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-white" />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {service.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Our Painting <span class="text-orange-500">Process</span>
+      </h2>
+
+      <div class="space-y-8">
+        {
+          [
+            {
+              step: "1",
+              title: "Consultation & Color",
+              description:
+                "We discuss your vision, help with color selection, and provide a detailed estimate.",
+            },
+            {
+              step: "2",
+              title: "Preparation",
+              description:
+                "We move furniture, cover floors, patch holes, and tape edges for protection.",
+            },
+            {
+              step: "3",
+              title: "Painting",
+              description:
+                "We apply premium paint with professional techniques for smooth, even coverage.",
+            },
+            {
+              step: "4",
+              title: "Inspection",
+              description:
+                "We conduct a thorough walkthrough to ensure every detail meets our high standards.",
+            },
+            {
+              step: "5",
+              title: "Cleanup",
+              description:
+                "We remove all coverings and leave your space clean and ready to enjoy.",
+            },
+          ].map((item) => (
+            <div class="flex gap-6 items-start">
+              <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white">
+                {item.step}
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-2 font-inter">
+                  {item.title}
+                </h3>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,234 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServiceIntro from "@/components/sections/ServiceIntro.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import { Home, CheckCircle2, Calendar, Shield } from "@lucide/astro";
+import HomeMaintenanceImage from "@/assets/Maintenance_home.webp";
+
+const benefits = [
+  "Preventive maintenance programs",
+  "Seasonal home preparation",
+  "Regular inspection services",
+  "Minor repair services",
+  "Emergency repair response",
+  "Customized maintenance plans",
+];
+
+const faqs = [
+  {
+    question: "What's included in home maintenance?",
+    answer:
+      "Our maintenance services include regular inspections, preventive repairs, seasonal preparations, and addressing minor issues before they become major problems.",
+  },
+  {
+    question: "How often should I schedule maintenance?",
+    answer:
+      "We recommend quarterly maintenance visits to keep your home in top condition. We can customize a schedule based on your specific needs.",
+  },
+  {
+    question: "Can you create a custom maintenance plan?",
+    answer:
+      "Yes! We'll assess your home and create a personalized maintenance plan that addresses your property's specific needs and your budget.",
+  },
+  {
+    question: "What are the benefits of regular maintenance?",
+    answer:
+      "Regular maintenance prevents costly repairs, extends the life of your home systems, maintains property value, and gives you peace of mind.",
+  },
+];
+---
+
+<BaseLayout
+  title="Home Maintenance Services in Utah | Preventive Care & Repairs"
+  description="Professional home maintenance services in Utah. Preventive care, seasonal prep, inspections, and repairs. Keep your home in perfect condition year-round."
+>
+  <SchemaService
+    serviceName="Home Maintenance"
+    serviceType="Home Maintenance and Repair"
+    description="Comprehensive home maintenance services including preventive care, inspections, and regular maintenance throughout Utah."
+  />
+
+  <Breadcrumbs />
+
+  <ServiceIntro
+    title="Home Maintenance Services"
+    description="Keep your home in perfect condition with our comprehensive maintenance services. From preventive care to seasonal preparations, we help you avoid costly repairs and maintain your property's value."
+    icon={Home}
+    benefits={benefits}
+    image={HomeMaintenanceImage.src}
+  />
+
+  <!-- Services Details -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Maintenance <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              title: "Preventive Maintenance",
+              description:
+                "Regular inspections and minor repairs to prevent major issues and extend system life.",
+              icon: Shield,
+            },
+            {
+              title: "Seasonal Preparation",
+              description:
+                "Prepare your home for winter, summer, and seasonal changes to prevent weather-related damage.",
+              icon: Calendar,
+            },
+            {
+              title: "Safety Inspections",
+              description:
+                "Comprehensive safety checks for electrical, plumbing, and structural systems.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Minor Repairs",
+              description:
+                "Address small issues before they become expensive problems requiring major repairs.",
+              icon: Home,
+            },
+            {
+              title: "System Checks",
+              description:
+                "Regular checks of HVAC, plumbing, electrical, and other home systems.",
+              icon: CheckCircle2,
+            },
+            {
+              title: "Custom Plans",
+              description:
+                "Personalized maintenance schedules tailored to your home's specific needs.",
+              icon: Calendar,
+            },
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-white" />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {service.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Maintenance Checklist -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Seasonal Maintenance <span class="text-orange-500">Checklist</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Spring/Summer -->
+        <div class="bg-gray-900/50 border border-white/10 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-orange-500 mb-6 font-inter">
+            Spring & Summer
+          </h3>
+          <ul class="space-y-3">
+            {
+              [
+                "Inspect and clean gutters",
+                "Check air conditioning system",
+                "Inspect roof for winter damage",
+                "Test outdoor faucets and sprinklers",
+                "Check window and door screens",
+                "Inspect deck and outdoor structures",
+                "Clean and seal outdoor wood",
+                "Check exterior paint and caulking",
+              ].map((item) => (
+                <li class="flex items-start gap-3">
+                  <CheckCircle2 class="w-5 h-5 text-orange-500 shrink-0 mt-1" />
+                  <span class="text-gray-300">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Fall/Winter -->
+        <div class="bg-gray-900/50 border border-white/10 rounded-2xl p-8">
+          <h3 class="text-2xl font-bold text-orange-500 mb-6 font-inter">
+            Fall & Winter
+          </h3>
+          <ul class="space-y-3">
+            {
+              [
+                "Winterize outdoor faucets and pipes",
+                "Check heating system operation",
+                "Inspect and clean fireplace/chimney",
+                "Seal windows and doors for drafts",
+                "Clean gutters and downspouts",
+                "Inspect insulation in attic",
+                "Check weather stripping",
+                "Test smoke and CO detectors",
+              ].map((item) => (
+                <li class="flex items-start gap-3">
+                  <CheckCircle2 class="w-5 h-5 text-orange-500 shrink-0 mt-1" />
+                  <span class="text-gray-300">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl font-bold text-white mb-8 font-inter">
+        Why Regular Maintenance <span class="text-orange-500">Matters</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+        {
+          [
+            {
+              title: "Save Money",
+              description:
+                "Prevent costly emergency repairs by catching issues early when they're inexpensive to fix.",
+            },
+            {
+              title: "Extend Lifespan",
+              description:
+                "Regular maintenance extends the life of your home's systems and components.",
+            },
+            {
+              title: "Maintain Value",
+              description:
+                "A well-maintained home retains its value and appeals to future buyers.",
+            },
+            {
+              title: "Peace of Mind",
+              description:
+                "Know your home is in good condition and avoid unexpected breakdowns.",
+            },
+          ].map((benefit) => (
+            <div class="bg-gray-900/50 border border-orange-500/50 rounded-xl p-6">
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {benefit.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{benefit.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <CTA />
+</BaseLayout>

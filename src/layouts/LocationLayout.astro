@@ -1,0 +1,31 @@
+---
+import PageLayout from "./PageLayout.astro";
+import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import ServicesList from "@/components/sections/ServicesList.astro";
+import CTA from "@/components/sections/CTA.astro";
+
+const { title, description, city, state = "Utah" } = Astro.props;
+---
+
+<PageLayout title={title} description={description}>
+  <SchemaLocal city={city} state={state} />
+
+  <article class="space-y-16">
+    <header class="max-w-3xl">
+      <h1 class="text-4xl font-bold">
+        Handyman Services in {city}, {state}
+      </h1>
+      <p class="mt-4 text-lg text-gray-600">
+        <slot name="intro" />
+      </p>
+    </header>
+
+    <section class="prose max-w-none">
+      <slot />
+    </section>
+
+    <ServicesList />
+
+    <CTA />
+  </article>
+</PageLayout>
