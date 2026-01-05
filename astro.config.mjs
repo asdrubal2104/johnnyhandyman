@@ -1,9 +1,12 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 import { fileURLToPath } from "node:url";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://johnnypro.com",
+  integrations: [sitemap()],
   // Static Site Generation for maximum speed
   output: "static",
 

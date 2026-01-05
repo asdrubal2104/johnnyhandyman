@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import { CheckCircle2, Star } from "@lucide/astro";
 
 interface Props {
@@ -6,7 +8,7 @@ interface Props {
   description: string;
   icon?: any;
   benefits?: string[];
-  image?: string;
+  image?: string | ImageMetadata;
 }
 
 const {
@@ -74,7 +76,17 @@ const {
         <div
           class="aspect-square rounded-2xl overflow-hidden border-4 border-orange-500/20 shadow-2xl"
         >
-          <img src={image} alt={title} class="w-full h-full object-cover" />
+          {
+            typeof image === "string" ? (
+              <img src={image} alt={title} class="w-full h-full object-cover" />
+            ) : (
+              <Image
+                src={image}
+                alt={title}
+                class="w-full h-full object-cover"
+              />
+            )
+          }
         </div>
 
         <!-- Floating badge -->
@@ -89,48 +101,53 @@ const {
   </div>
 </section>
 
+<style>
+  [data-animate-service-content],
+  [data-animate-service-image] {
+    opacity: 0;
+    visibility: visible;
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  [data-animate-service-content] {
+    transform: translateX(-30px);
+  }
+
+  [data-animate-service-image] {
+    transform: translateX(30px);
+  }
+
+  .reveal-active[data-animate-service-content],
+  .reveal-active[data-animate-service-image] {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
 <script>
-  import gsap from "gsap";
-
   function setupServiceIntro() {
-    const sections = document.querySelectorAll(".service-intro-section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const content = entry.target.querySelector(
+              "[data-animate-service-content]"
+            );
+            const image = entry.target.querySelector(
+              "[data-animate-service-image]"
+            );
+            if (content) content.classList.add("reveal-active");
+            if (image) image.classList.add("reveal-active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    sections.forEach((section) => {
-      const content = section.querySelector("[data-animate-service-content]");
-      const image = section.querySelector("[data-animate-service-image]");
-
-      if (!content || !image) return;
-
-      // Initial state
-      gsap.set(content, { opacity: 0, x: -60 });
-      gsap.set(image, { opacity: 0, x: 60 });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              gsap.to(content, {
-                x: 0,
-                opacity: 1,
-                duration: 1,
-                ease: "power3.out",
-              });
-
-              gsap.to(image, {
-                x: 0,
-                opacity: 1,
-                duration: 1,
-                ease: "power3.out",
-                delay: 0.2,
-              });
-
-              observer.unobserve(section);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
+    document.querySelectorAll(".service-intro-section").forEach((section) => {
       observer.observe(section);
     });
   }

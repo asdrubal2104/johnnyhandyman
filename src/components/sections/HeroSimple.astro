@@ -41,9 +41,9 @@ const features: Feature[] = [
 <section
   id="hero"
   data-hero-container
-  class="relative w-full min-h-[90vh] md:h-[800px] text-white overflow-hidden"
+  class="relative w-full h-svh min-h-[600px] md:h-[800px] text-white overflow-hidden"
 >
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-0 select-none pointer-events-none">
     {
       slides.map((slide, i) => (
         <Image
@@ -52,6 +52,7 @@ const features: Feature[] = [
           data-hero-slide
           class={`absolute inset-0 w-full h-full object-cover ${i === 0 ? "opacity-100" : "opacity-0"}`}
           loading={i === 0 ? "eager" : "lazy"}
+          {...(i === 0 ? { fetchpriority: "high" } : {})}
         />
       ))
     }
@@ -59,9 +60,9 @@ const features: Feature[] = [
   </div>
 
   <div
-    class="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-12 text-center pt-20"
+    class="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-6 md:px-12 text-center pt-10 md:pt-20"
   >
-    <div class="max-w-4xl space-y-8">
+    <div class="max-w-4xl space-y-6 md:space-y-8">
       <h1
         data-animate-title
         class="text-4xl sm:text-5xl md:text-7xl font-bold font-inter leading-tight tracking-tight"
@@ -71,14 +72,14 @@ const features: Feature[] = [
 
       <p
         data-animate-subtitle
-        class="text-xl md:text-2xl font-roboto max-w-2xl mx-auto text-gray-200"
+        class="text-lg md:text-2xl font-roboto max-w-2xl mx-auto text-gray-200"
       >
         Professional home repairs and maintenance for apartments and houses.
       </p>
 
       <div
         data-animate-cta
-        class="flex flex-col sm:flex-row gap-4 justify-center pt-4 w-full sm:w-auto px-4 sm:px-0"
+        class="flex flex-col sm:flex-row gap-4 justify-center pt-2 md:pt-4 w-full sm:w-auto px-4 sm:px-0"
       >
         <a
           href="/contact"
@@ -94,12 +95,15 @@ const features: Feature[] = [
         </a>
       </div>
 
-      <div data-animate-icons class="flex flex-wrap gap-6 pt-8 justify-center">
+      <div
+        data-animate-icons
+        class="flex flex-wrap gap-4 md:gap-6 pt-6 md:pt-8 justify-center"
+      >
         {
           features.map(({ icon: Icon, label }) => (
-            <div class="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+            <div class="flex items-center gap-3 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 will-change-transform">
               <Icon class="w-5 h-5 text-orange-500" />
-              <span class="font-roboto font-medium text-sm md:text-base">
+              <span class="font-roboto font-medium text-xs md:text-base">
                 {label}
               </span>
             </div>
@@ -109,7 +113,9 @@ const features: Feature[] = [
     </div>
   </div>
 
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+  <div
+    class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3"
+  >
     {
       slides.map((_, i) => (
         <button
@@ -123,6 +129,53 @@ const features: Feature[] = [
   </div>
 </section>
 
+<style>
+  [data-animate-title],
+  [data-animate-subtitle],
+  [data-animate-cta],
+  [data-animate-icons] > div {
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: visible; /* Changed from hidden to avoid JS execution block */
+  }
+
+  /* Entrance Animations */
+  .hero-animated [data-animate-title] {
+    animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.1s;
+  }
+  .hero-animated [data-animate-subtitle] {
+    animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.2s;
+  }
+  .hero-animated [data-animate-cta] {
+    animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+  }
+  .hero-animated [data-animate-icons] > div {
+    animation: fadeUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .hero-animated [data-animate-icons] > div:nth-child(1) {
+    animation-delay: 0.4s;
+  }
+  .hero-animated [data-animate-icons] > div:nth-child(2) {
+    animation-delay: 0.45s;
+  }
+  .hero-animated [data-animate-icons] > div:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+  .hero-animated [data-animate-icons] > div:nth-child(4) {
+    animation-delay: 0.55s;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 <script>
   import gsap from "gsap";
 
@@ -130,7 +183,9 @@ const features: Feature[] = [
     const containers = document.querySelectorAll("[data-hero-container]");
 
     containers.forEach((container) => {
-      // Cleanup previous instances if any
+      // Trigger CSS animations immediately
+      container.classList.add("hero-animated");
+
       const existingInterval = (container as any)._heroInterval;
       if (existingInterval) clearInterval(existingInterval);
 
@@ -140,52 +195,31 @@ const features: Feature[] = [
       const dots = container.querySelectorAll(
         "[data-hero-dot]"
       ) as NodeListOf<HTMLElement>;
-      const title = container.querySelector(
-        "[data-animate-title]"
-      ) as HTMLElement;
-      const subtitle = container.querySelector(
-        "[data-animate-subtitle]"
-      ) as HTMLElement;
-      const ctas = container.querySelector("[data-animate-cta]") as HTMLElement;
-      const icons = container.querySelectorAll(
-        "[data-animate-icons] > div"
-      ) as NodeListOf<HTMLElement>;
 
       if (slides.length === 0) return;
-
-      // Initial state setup to prevent "flash" or incorrect "from" calculations
-      gsap.killTweensOf([title, subtitle, ctas, ...Array.from(icons)]);
-      gsap.set([title, subtitle, ctas], { opacity: 0, y: 30 });
-      gsap.set(icons, { opacity: 0, y: 20 });
-
-      // Animation Timeline
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration: 1 },
-      });
-
-      tl.to(title, { y: 0, opacity: 1, delay: 0.2 })
-        .to(subtitle, { y: 0, opacity: 1 }, "-=0.7")
-        .to(ctas, { y: 0, opacity: 1 }, "-=0.7")
-        .to(icons, { y: 0, opacity: 1, stagger: 0.1 }, "-=0.5");
 
       let current = 0;
       const total = slides.length;
       let interval: ReturnType<typeof setInterval> | undefined;
+      const isMobile = window.innerWidth < 768;
 
       function goToSlide(slideIndex: number) {
         if (slideIndex === current) return;
-
         const prev = current;
         current = slideIndex;
 
-        gsap.to(slides[prev], { opacity: 0, scale: 1.05, duration: 1.5 });
-        gsap.fromTo(
-          slides[current],
-          { opacity: 0, scale: 1.1 },
-          { opacity: 1, scale: 1, duration: 2, ease: "power2.out" }
-        );
+        if (isMobile) {
+          gsap.to(slides[prev], { opacity: 0, duration: 0.8 });
+          gsap.to(slides[current], { opacity: 1, duration: 0.8 });
+        } else {
+          gsap.to(slides[prev], { opacity: 0, scale: 1.02, duration: 1 });
+          gsap.fromTo(
+            slides[current],
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }
+          );
+        }
 
-        // Update dots UI
         dots.forEach((dot, idx) => {
           if (idx === current) {
             dot.classList.remove("bg-white/40", "bg-white/60");
@@ -200,9 +234,7 @@ const features: Feature[] = [
       function startAutoplay() {
         stopAutoplay();
         if (total <= 1) return;
-        interval = setInterval(() => {
-          goToSlide((current + 1) % total);
-        }, 7000);
+        interval = setInterval(() => goToSlide((current + 1) % total), 7000);
         (container as any)._heroInterval = interval;
       }
 
@@ -214,33 +246,48 @@ const features: Feature[] = [
         }
       }
 
+      let touchStartX = 0;
+      container.addEventListener(
+        "touchstart",
+        (e: any) => {
+          touchStartX = e.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
+
+      container.addEventListener(
+        "touchend",
+        (e: any) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          if (Math.abs(touchEndX - touchStartX) > 50) {
+            if (touchEndX < touchStartX) goToSlide((current + 1) % total);
+            else goToSlide((current - 1 + total) % total);
+            startAutoplay();
+          }
+        },
+        { passive: true }
+      );
+
       dots.forEach((dot, idx) => {
         dot.addEventListener("click", () => {
           goToSlide(idx);
-          startAutoplay(); // Reset timer
+          startAutoplay();
         });
       });
 
-      // Ensure first slide is set up correctly
-      gsap.set(slides[0], { opacity: 1, scale: 1 });
+      // Initial state
       slides.forEach((slide, i) => {
-        if (i !== 0) gsap.set(slide, { opacity: 0 });
+        gsap.set(slide, { opacity: i === 0 ? 1 : 0, scale: 1 });
       });
 
       startAutoplay();
     });
   }
 
-  // Run on initial load
   setupHero();
-
-  // Run on view transitions navigation
   document.addEventListener("astro:page-load", setupHero);
-
-  // Cleanup on page swap to prevent memory leaks
   document.addEventListener("astro:before-swap", () => {
-    const containers = document.querySelectorAll("[data-hero-container]");
-    containers.forEach((container) => {
+    document.querySelectorAll("[data-hero-container]").forEach((container) => {
       const interval = (container as any)._heroInterval;
       if (interval) clearInterval(interval);
     });

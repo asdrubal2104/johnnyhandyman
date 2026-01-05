@@ -20,7 +20,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="py-20 bg-linear-to-b from-gray-900 to-black">
+<section
+  class="py-20 bg-linear-to-b from-gray-900 to-black location-intro-section"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Content -->
@@ -127,46 +129,60 @@ const {
       </div>
     </div>
   </div>
-</section>
+  <style>
+    [data-animate-location-content],
+    [data-animate-location-image] {
+      opacity: 0;
+      visibility: visible;
+      transition:
+        opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
-<script>
-  import gsap from "gsap";
+    [data-animate-location-content] {
+      transform: translateX(-30px);
+    }
 
-  function setupLocationIntro() {
-    const content = document.querySelector("[data-animate-location-content]");
-    const image = document.querySelector("[data-animate-location-image]");
+    [data-animate-location-image] {
+      transform: translateX(30px);
+    }
 
-    if (!content || !image) return;
+    .reveal-active[data-animate-location-content],
+    .reveal-active[data-animate-location-image] {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            gsap.from(content, {
-              x: -60,
-              opacity: 0,
-              duration: 1,
-              ease: "power3.out",
-            });
+  <script>
+    function setupLocationIntro() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const content = entry.target.querySelector(
+                "[data-animate-location-content]"
+              );
+              const image = entry.target.querySelector(
+                "[data-animate-location-image]"
+              );
+              if (content) content.classList.add("reveal-active");
+              if (image) image.classList.add("reveal-active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
 
-            gsap.from(image, {
-              x: 60,
-              opacity: 0,
-              duration: 1,
-              ease: "power3.out",
-              delay: 0.2,
-            });
-
-            observer.disconnect();
-          }
+      document
+        .querySelectorAll(".location-intro-section")
+        .forEach((section) => {
+          observer.observe(section);
         });
-      },
-      { threshold: 0.2 }
-    );
+    }
 
-    if (content) observer.observe(content);
-  }
-
-  setupLocationIntro();
-  document.addEventListener("astro:page-load", setupLocationIntro);
-</script>
+    setupLocationIntro();
+    document.addEventListener("astro:page-load", setupLocationIntro);
+  </script>
+</section>

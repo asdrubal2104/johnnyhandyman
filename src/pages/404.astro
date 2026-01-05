@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Home, ArrowLeft } from "@lucide/astro";
+---
+
+<BaseLayout
+  title="404 - Page Not Found | Johnny Pro Handyman"
+  description="The page you are looking for does not exist. Return to Johnny Pro Handyman home for expert home repairs in Utah."
+>
+  <section
+    class="min-h-[70vh] flex items-center justify-center py-20 bg-linear-to-b from-gray-900 to-black"
+  >
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="relative mb-8">
+        <h1 class="text-9xl font-black text-white/5 font-inter select-none">
+          404
+        </h1>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div
+            class="w-24 h-24 bg-orange-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-orange-500/20 rotate-12"
+          >
+            <span class="text-5xl font-bold text-white">?</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 font-inter">
+        Oops! Page <span class="text-orange-500">Not Found</span>
+      </h2>
+
+      <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+        The page you're looking for might have been moved, deleted, or never
+        existed in the first place.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+        >
+          <Home class="w-5 h-5" />
+          Back to Home
+        </a>
+        <button
+          onclick="history.back()"
+          class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all"
+        >
+          <ArrowLeft class="w-5 h-5" />
+          Go Back
+        </button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

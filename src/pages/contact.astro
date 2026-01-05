@@ -145,7 +145,7 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
                   <div
                     class="text-xl font-semibold text-white group-hover:text-orange-500 transition-colors"
                   >
-                    (801) 555-1234
+                    (863) 266-1866
                   </div>
                 </div>
               </a>
@@ -164,7 +164,7 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
                   <div
                     class="text-xl font-semibold text-white group-hover:text-orange-500 transition-colors"
                   >
-                    info@johnnypro.com
+                    info@johnnyprohandyman.com
                   </div>
                 </div>
               </a>
@@ -272,23 +272,66 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
   </section>
 </BaseLayout>
 
+<script
+  is:inline
+  src={`https://www.google.com/recaptcha/api.js?render=${import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY}`}
+></script>
+
 <script>
+  import { actions, isActionError } from "astro:actions";
+
   function setupContact() {
     const form = document.getElementById("contact-form") as HTMLFormElement;
+    const submitBtn = form?.querySelector(
+      'button[type="submit"]'
+    ) as HTMLButtonElement;
 
-    if (form) {
-      // Remove old listeners to be safe, though purely creating new function scope usually suffices if elements are replaced
-      // But creating a named handler helps if we needed strict cleanup.
-      // Since specific elements are replaced on navigation, simple re-add matches Astro pattern.
-
-      form.addEventListener("submit", (e) => {
+    if (form && submitBtn) {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // In a real application, you would send this data to a server
-        alert(
-          "Thank you for your message! We will get back to you within 24 hours."
-        );
-        form.reset();
+        submitBtn.disabled = true;
+        const originalContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = "Sending...";
+
+        try {
+          // Wait for reCAPTCHA to be ready
+          const grecaptcha = (window as any).grecaptcha;
+          await new Promise((resolve) => grecaptcha.ready(resolve));
+
+          // Execute reCAPTCHA
+          const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
+          const token = await grecaptcha.execute(siteKey, {
+            action: "submit_contact",
+          });
+
+          const formData = new FormData(form);
+          formData.append("recaptchaToken", token);
+
+          const { data, error } = await actions.contact(formData);
+
+          if (error) {
+            if (isActionError(error)) {
+              alert(
+                error.message || "Invalid submission. Please check the fields."
+              );
+            } else {
+              alert("An unexpected error occurred. Please try again later.");
+            }
+            return;
+          }
+
+          if (data?.success) {
+            alert(data.message);
+            form.reset();
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Connection error. Please check your internet.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalContent;
+        }
       });
     }
   }

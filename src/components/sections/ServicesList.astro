@@ -47,7 +47,7 @@ const services = [
 ];
 ---
 
-<section class="py-20 bg-linear-to-b from-black to-gray-900">
+<section class="py-20 bg-linear-to-b from-black to-gray-900 services-list-section">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-16" data-animate-header>
@@ -60,7 +60,7 @@ const services = [
     </div>
 
     <!-- Services Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 services-grid">
       {services.map((service, index) => (
         <article 
           class="group relative bg-linear-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-2"
@@ -124,61 +124,54 @@ const services = [
   </div>
 </section>
 
+<style>
+  [data-animate-header],
+  [data-animate-card],
+  [data-animate-cta] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    visibility: visible;
+  }
+
+  [data-animate-header].reveal-active,
+  [data-animate-card].reveal-active,
+  [data-animate-cta].reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
 <script>
-  import gsap from "gsap";
-
   function setupServicesAnimation() {
-    const header = document.querySelector('[data-animate-header]');
-    const cards = document.querySelectorAll('[data-animate-card]');
-    const cta = document.querySelector('[data-animate-cta]');
-
-    if (!header || cards.length === 0) return;
-
-    // Set initial state
-    gsap.set([header, cards, cta], { opacity: 0, y: 30 });
-
-    // Animate on scroll
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate header
-            gsap.to(header, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: "power3.out"
-            });
-
-            // Animate cards with stagger
-            gsap.to(cards, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: "power3.out",
-              delay: 0.2
-            });
-
-            // Animate CTA
-            if (cta) {
-              gsap.to(cta, {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                ease: "power3.out",
-                delay: 0.6
+            if (entry.target.hasAttribute('data-animate-header') || entry.target.hasAttribute('data-animate-cta')) {
+              entry.target.classList.add('reveal-active');
+            } else {
+              const items = entry.target.querySelectorAll('[data-animate-card]');
+              items.forEach((item, i) => {
+                setTimeout(() => item.classList.add('reveal-active'), i * 60);
               });
             }
-
-            observer.disconnect();
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    if (header) observer.observe(header);
+    document.querySelectorAll('.services-list-section').forEach((section) => {
+      const header = section.querySelector('[data-animate-header]');
+      const grid = section.querySelector('.services-grid');
+      const cta = section.querySelector('[data-animate-cta]');
+
+      if (header) observer.observe(header);
+      if (grid) observer.observe(grid);
+      if (cta) observer.observe(cta);
+    });
   }
 
   setupServicesAnimation();

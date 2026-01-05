@@ -7,11 +7,26 @@
 
 @layer base {
   html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     font-family: var(--font-roboto);
     scroll-behavior: smooth;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  body {
+    @apply antialiased text-white bg-black;
+    /* Prevent horizontal scroll issues on some mobile browsers */
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-inter);
   }
 
@@ -22,7 +37,8 @@
   }
 
   /* Smooth transitions for interactive elements */
-  a, button {
+  a,
+  button {
     transition: all 0.2s ease-in-out;
   }
 

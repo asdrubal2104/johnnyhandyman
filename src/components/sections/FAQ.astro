@@ -49,7 +49,7 @@ const defaultFaqs = [
 const faqList = faqs.length > 0 ? faqs : defaultFaqs;
 ---
 
-<section class="py-20 bg-black">
+<section class="py-20 bg-black faq-section">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16" data-animate-faq-header>
       <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
@@ -62,147 +62,165 @@ const faqList = faqs.length > 0 ? faqs : defaultFaqs;
 
     <div class="space-y-4" data-faq-container>
       {
-        faqList.map((faq, index) => (
-          <div
-            class="bg-gray-900/50 border border-white/10 rounded-xl overflow-hidden hover:border-orange-500/50 transition-all"
-            data-faq-item
-            data-index={index}
-          >
-            <button
-              class="w-full px-6 py-5 flex items-center justify-between text-left group"
-              data-faq-button
-              aria-expanded="false"
-            >
-              <span class="text-lg font-semibold text-white group-hover:text-orange-500 transition-colors pr-4">
-                {faq.question}
-              </span>
-              <div class="shrink-0">
-                <Plus
-                  class="w-6 h-6 text-orange-500 transition-transform"
-                  data-icon-plus
-                />
-                <Minus
-                  class="w-6 h-6 text-orange-500 hidden transition-transform"
-                  data-icon-minus
-                />
-              </div>
-            </button>
-
+        faqList.map(
+          (faq: { question: string; answer: string }, index: number) => (
             <div
-              class="overflow-hidden transition-all duration-300 max-h-0"
-              data-faq-answer
+              class="bg-gray-900/50 border border-white/10 rounded-xl overflow-hidden hover:border-orange-500/50 transition-all"
+              data-faq-item
+              data-index={index}
             >
-              <div class="px-6 pb-5 text-gray-300 leading-relaxed">
-                {faq.answer}
+              <button
+                class="w-full px-6 py-5 flex items-center justify-between text-left group"
+                data-faq-button
+                aria-expanded="false"
+              >
+                <span class="text-lg font-semibold text-white group-hover:text-orange-500 transition-colors pr-4">
+                  {faq.question}
+                </span>
+                <div class="shrink-0">
+                  <Plus
+                    class="w-6 h-6 text-orange-500 transition-transform"
+                    data-icon-plus
+                  />
+                  <Minus
+                    class="w-6 h-6 text-orange-500 hidden transition-transform"
+                    data-icon-minus
+                  />
+                </div>
+              </button>
+
+              <div
+                class="overflow-hidden transition-all duration-300 max-h-0"
+                data-faq-answer
+              >
+                <div class="px-6 pb-5 text-gray-300 leading-relaxed">
+                  {faq.answer}
+                </div>
               </div>
             </div>
-          </div>
-        ))
+          )
+        )
       }
     </div>
   </div>
 </section>
 
+<style>
+  [data-animate-faq-header],
+  [data-faq-item] {
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: visible;
+    transition:
+      opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .reveal-active[data-animate-faq-header],
+  .reveal-active[data-faq-item] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
 <script>
   import gsap from "gsap";
 
   function setupFAQ() {
-    const container = document.querySelector("[data-faq-container]");
-    const header = document.querySelector("[data-animate-faq-header]");
+    document.querySelectorAll(".faq-section").forEach((section) => {
+      const container = section.querySelector("[data-faq-container]");
+      const header = section.querySelector("[data-animate-faq-header]");
 
-    if (!container || !header) return;
+      if (!container || !header) return;
 
-    const items = container.querySelectorAll("[data-faq-item]");
+      const items = container.querySelectorAll("[data-faq-item]");
 
-    // Setup toggle logic
-    items.forEach((item) => {
-      const button = item.querySelector("[data-faq-button]");
-      const answer = item.querySelector("[data-faq-answer]");
-      const iconPlus = item.querySelector("[data-icon-plus]");
-      const iconMinus = item.querySelector("[data-icon-minus]");
+      // Setup toggle logic
+      items.forEach((item) => {
+        const button = item.querySelector("[data-faq-button]");
+        const answer = item.querySelector("[data-faq-answer]");
+        const iconPlus = item.querySelector("[data-icon-plus]");
+        const iconMinus = item.querySelector("[data-icon-minus]");
 
-      if (!button || !answer || !iconPlus || !iconMinus) return;
+        if (!button || !answer || !iconPlus || !iconMinus) return;
 
-      button.addEventListener("click", () => {
-        const isOpen = button.getAttribute("aria-expanded") === "true";
+        const clonedButton = button.cloneNode(true);
+        button.replaceWith(clonedButton);
+        const newButton = clonedButton as HTMLElement;
 
-        // Close all other items
-        items.forEach((otherItem) => {
-          if (otherItem !== item) {
-            const otherButton = otherItem.querySelector("[data-faq-button]");
-            const otherAnswer = otherItem.querySelector("[data-faq-answer]");
-            const otherIconPlus = otherItem.querySelector("[data-icon-plus]");
-            const otherIconMinus = otherItem.querySelector("[data-icon-minus]");
+        newButton.addEventListener("click", () => {
+          const isOpen = newButton.getAttribute("aria-expanded") === "true";
 
-            if (otherButton && otherAnswer && otherIconPlus && otherIconMinus) {
-              otherButton.setAttribute("aria-expanded", "false");
-              gsap.to(otherAnswer, {
-                maxHeight: 0,
-                duration: 0.3,
-                ease: "power2.inOut",
-              });
-              otherIconPlus.classList.remove("hidden");
-              otherIconMinus.classList.add("hidden");
+          // Close others
+          items.forEach((otherItem) => {
+            if (otherItem !== item) {
+              const otherBtn = otherItem.querySelector("[data-faq-button]");
+              const otherAns = otherItem.querySelector("[data-faq-answer]");
+              if (
+                otherBtn &&
+                otherAns &&
+                otherBtn.getAttribute("aria-expanded") === "true"
+              ) {
+                otherBtn.setAttribute("aria-expanded", "false");
+                gsap.to(otherAns, {
+                  maxHeight: 0,
+                  duration: 0.25,
+                  ease: "power2.inOut",
+                });
+                otherItem
+                  .querySelector("[data-icon-plus]")
+                  ?.classList.remove("hidden");
+                otherItem
+                  .querySelector("[data-icon-minus]")
+                  ?.classList.add("hidden");
+              }
             }
+          });
+
+          if (isOpen) {
+            newButton.setAttribute("aria-expanded", "false");
+            gsap.to(answer, {
+              maxHeight: 0,
+              duration: 0.25,
+              ease: "power2.inOut",
+            });
+            iconPlus.classList.remove("hidden");
+            iconMinus.classList.add("hidden");
+          } else {
+            newButton.setAttribute("aria-expanded", "true");
+            gsap.to(answer, {
+              maxHeight: (answer as HTMLElement).scrollHeight,
+              duration: 0.25,
+              ease: "power2.inOut",
+            });
+            iconPlus.classList.add("hidden");
+            iconMinus.classList.remove("hidden");
           }
         });
-
-        // Toggle current item
-        if (isOpen) {
-          button.setAttribute("aria-expanded", "false");
-          gsap.to(answer, {
-            maxHeight: 0,
-            duration: 0.3,
-            ease: "power2.inOut",
-          });
-          iconPlus.classList.remove("hidden");
-          iconMinus.classList.add("hidden");
-        } else {
-          button.setAttribute("aria-expanded", "true");
-          gsap.to(answer, {
-            maxHeight: answer.scrollHeight,
-            duration: 0.3,
-            ease: "power2.inOut",
-          });
-          iconPlus.classList.add("hidden");
-          iconMinus.classList.remove("hidden");
-        }
       });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (entry.target.hasAttribute("data-animate-faq-header")) {
+                entry.target.classList.add("reveal-active");
+              } else {
+                const items = entry.target.querySelectorAll("[data-faq-item]");
+                items.forEach((item, i) => {
+                  setTimeout(() => item.classList.add("reveal-active"), i * 50);
+                });
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(header);
+      observer.observe(container);
     });
-
-    // Set initial state for animations
-    gsap.set(header, { opacity: 0, y: 40 });
-    gsap.set(items, { opacity: 0, y: 30 });
-
-    // Animate on scroll
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            gsap.to(header, {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: "power3.out",
-            });
-
-            gsap.to(items, {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: "power3.out",
-              delay: 0.2,
-            });
-
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(header);
   }
 
   setupFAQ();

@@ -138,50 +138,52 @@ import { Phone, ArrowRight } from "@lucide/astro";
   </div>
 </section>
 
+<style>
+  [data-animate-content],
+  [data-animate-image] {
+    opacity: 0;
+    visibility: visible;
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  [data-animate-content] {
+    transform: translateX(-30px);
+  }
+
+  [data-animate-image] {
+    transform: translateX(30px);
+  }
+
+  .reveal-active[data-animate-content],
+  .reveal-active[data-animate-image] {
+    opacity: 1;
+    transform: translateX(0);
+  }
+</style>
+
 <script>
-  import gsap from "gsap";
-
   function setupCTAAnimation() {
-    const ctas = document.querySelectorAll(".cta-section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const content = entry.target.querySelector(
+              "[data-animate-content]"
+            );
+            const image = entry.target.querySelector("[data-animate-image]");
+            if (content) content.classList.add("reveal-active");
+            if (image) image.classList.add("reveal-active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    ctas.forEach((cta) => {
-      const content = cta.querySelector("[data-animate-content]");
-      const image = cta.querySelector("[data-animate-image]");
-
-      if (!content || !image) return;
-
-      // Set initial state
-      gsap.set(content, { opacity: 0, x: -60 });
-      gsap.set(image, { opacity: 0, x: 60 });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // Animate to visible
-              gsap.to(content, {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: "power3.out",
-              });
-
-              gsap.to(image, {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: "power3.out",
-                delay: 0.2,
-              });
-
-              observer.unobserve(cta);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
-      observer.observe(cta);
+    document.querySelectorAll(".cta-section").forEach((section) => {
+      observer.observe(section);
     });
   }
 
