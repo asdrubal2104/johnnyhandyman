@@ -64,11 +64,11 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
       <!-- Contact Info & CTA -->
       <div class="hidden lg:flex items-center gap-4">
         <a
-          href="tel:+18015551234"
+          href="tel:(863) 266 1866"
           class="flex items-center gap-2 text-white hover:text-orange-500 transition-colors"
         >
           <Phone class="w-4 h-4" />
-          <span class="text-sm font-medium">(801) 555-1234</span>
+          <span class="text-sm font-medium">(863) 266-1866</span>
         </a>
         <a
           href="/contact"
@@ -133,7 +133,7 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
 
     <div class="mt-auto pt-8 border-t border-white/10 space-y-6">
       <a
-        href="tel:+18015551234"
+        href="tel:(863) 266-1866"
         class="flex items-center gap-3 text-xl text-white hover:text-orange-500 transition-colors"
       >
         <div
@@ -141,11 +141,11 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
         >
           <Phone class="w-5 h-5" />
         </div>
-        <span class="font-medium">(801) 555-1234</span>
+        <span class="font-medium">(863) 266-1866</span>
       </a>
 
       <a
-        href="mailto:info@johnnypro.com"
+        href="mailto:info@johnnyprohandyman.com"
         class="flex items-center gap-3 text-xl text-white hover:text-orange-500 transition-colors"
       >
         <div
@@ -153,7 +153,7 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
         >
           <Mail class="w-5 h-5" />
         </div>
-        <span class="font-medium">info@johnnypro.com</span>
+        <span class="font-medium">info@johnnyprohandyman.com</span>
       </a>
 
       <a
@@ -185,13 +185,13 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
         menu?.classList.remove("translate-x-full");
         menuIcon?.classList.add("opacity-0");
         closeIcon?.classList.remove("opacity-0");
-        document.body.style.overflow = "hidden"; // Prevent scrolling
+        document.body.style.overflow = "hidden";
       } else {
         // Close
         menu?.classList.add("translate-x-full");
         menuIcon?.classList.remove("opacity-0");
         closeIcon?.classList.add("opacity-0");
-        document.body.style.overflow = ""; // Restore scrolling
+        document.body.style.overflow = "";
       }
     }
 
