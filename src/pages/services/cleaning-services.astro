@@ -1,0 +1,191 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ServiceIntro from "@/components/sections/ServiceIntro.astro";
+import FAQ from "@/components/sections/FAQ.astro";
+import CTA from "@/components/sections/CTA.astro";
+import SchemaService from "@/components/seo/SchemaService.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
+import {
+  Sparkles,
+  Factory,
+  Building2,
+  Home,
+  Trash2,
+  ShieldCheck,
+  CheckCircle2,
+  DollarSign,
+} from "@lucide/astro";
+import CleaningServicesImage from "@/assets/Cleaning_service.webp";
+
+const benefits = [
+  "Industrial & Warehouse Cleaning",
+  "Commercial Office Cleaning",
+  "Residential Deep Cleaning",
+  "Post-Construction Cleanup",
+  "Move-in/Move-out Services",
+  "Eco-friendly Options",
+];
+
+const faqs = [
+  {
+    question: "Do you bring your own cleaning supplies?",
+    answer:
+      "Yes, we bring all necessary professional-grade equipment and eco-friendly cleaning supplies. If you have specific product preferences, we are happy to accommodate them.",
+  },
+  {
+    question: "Is your cleaning staff insured and background checked?",
+    answer:
+      "Absolutely. All our cleaning professionals undergo rigorous background checks and are fully insured for your peace of mind and protection.",
+  },
+  {
+    question: "Can I schedule cleaning after business hours?",
+    answer:
+      "Yes! We offer flexible scheduling, including evenings and weekends, to minimize disruption to your business operations or daily routine.",
+  },
+  {
+    question: "What is included in a deep clean?",
+    answer:
+      "Our deep cleaning value-add includes baseboards, inside windows, behind appliances, light fixtures, and thorough sanitization of bathrooms and kitchens, going far beyond a standard surface clean.",
+  },
+];
+---
+
+<BaseLayout
+  title="Professional Cleaning Services Ogden, Utah | Industrial, Commercial & Residential"
+  description="Expert cleaning services in Ogden & Weber County. Industrial, commercial, and residential cleaning. Deep cleans, move-outs, and post-construction. Professional and reliable."
+>
+  <SchemaService
+    serviceName="Cleaning Services"
+    serviceType="Professional Cleaning"
+    description="Comprehensive cleaning services for homes, offices, and industrial facilities in Utah."
+  />
+
+  <Breadcrumbs />
+
+  <ServiceIntro
+    title="Professional Cleaning Services"
+    description="Experience a spotless environment with our comprehensive cleaning solutions. From heavy-duty industrial cleaning to detailed residential service, we ensure your space is pristine, healthy, and welcoming."
+    icon={Sparkles}
+    benefits={benefits}
+    image={CleaningServicesImage.src}
+  />
+
+  <!-- Services Details -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Our Cleaning <span class="text-orange-500">Services</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          [
+            {
+              title: "Industrial Cleaning",
+              description:
+                "Heavy-duty cleaning for warehouses, factories, and manufacturing plants. We handle machinery, floors, and high-traffic areas.",
+              icon: Factory,
+            },
+            {
+              title: "Commercial Cleaning",
+              description:
+                "Keep your office or retail space professional with specialized janitorial services for workspaces, lobbies, and restrooms.",
+              icon: Building2,
+            },
+            {
+              title: "Post-Construction",
+              description:
+                "Removal of dust, debris, and construction residue to make your new space move-in ready.",
+              icon: Trash2,
+            },
+            {
+              title: "Sanitization Services",
+              description:
+                "Thorough disinfection of high-touch surfaces using hospital-grade products to ensure safety.",
+              icon: ShieldCheck,
+            },
+            {
+              title: "Move-In/Move-Out",
+              description:
+                "Comprehensive cleaning for transitions. Guarantee your deposit back or start fresh in your new home.",
+              icon: CheckCircle2,
+            },
+          ].map((service) => (
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-6 hover:border-orange-500/50 transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <service.icon class="w-6 h-6 text-white" />
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 font-inter">
+                {service.title}
+              </h3>
+              <p class="text-gray-400 leading-relaxed">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 bg-linear-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-white mb-12 font-inter text-center">
+        Our Cleaning <span class="text-orange-500">Process</span>
+      </h2>
+
+      <div class="space-y-8">
+        {
+          [
+            {
+              step: "1",
+              title: "Assessment & Quote",
+              description:
+                "We visit your site to understand your specific needs in detail and provide a transparent, customized quote.",
+            },
+            {
+              step: "2",
+              title: "Custom Plan",
+              description:
+                "We develop a cleaning checklist tailored to your facility type, schedule, and priorities.",
+            },
+            {
+              step: "3",
+              title: "The Clean",
+              description:
+                "Our trained team arrives on time with professional equipment to execute the plan efficiently.",
+            },
+            {
+              step: "4",
+              title: "Quality Check",
+              description:
+                "Supervisors inspect the work to ensure every corner meets our strict hygiene and quality standards.",
+            },
+            {
+              step: "5",
+              title: "Maintenance",
+              description:
+                "We set up a recurring schedule that works for you to keep your space consistently pristine.",
+            },
+          ].map((item) => (
+            <div class="flex gap-6 items-start">
+              <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white">
+                {item.step}
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white mb-2 font-inter">
+                  {item.title}
+                </h3>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <CTA />
+</BaseLayout>

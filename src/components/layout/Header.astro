@@ -2,7 +2,7 @@
 import { Menu, X, Phone, Mail } from "@lucide/astro";
 ---
 
-<header class="sticky top-0 z-50 h-20">
+<header class="sticky top-0 z-50 h-24 md:h-30">
   <!-- Header Background Layer (Separated to preserve stacking context for children) -->
   <div
     class="absolute inset-0 bg-black/95 backdrop-blur-md border-b border-white/10 z-0"
@@ -12,19 +12,12 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
   <div class="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
     <div class="flex items-center justify-between h-full">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
-        <div
-          class="w-12 h-12 bg-linear-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform"
-        >
-          <span class="text-white font-bold text-xl">JP</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-white font-bold text-xl font-inter">Johnny Pro</span
-          >
-          <span class="text-orange-500 text-xs font-medium"
-            >Handyman Services</span
-          >
-        </div>
+      <a href="/" class="block group">
+        <img
+          src="/logo_johnnyprohandyman.webp"
+          alt="Johnny Pro Handyman Services"
+          class="h-18 md:h-26 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        />
       </a>
 
       <!-- Desktop Navigation -->
@@ -74,7 +67,7 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
           href="/contact"
           class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-semibold transition-all hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/20"
         >
-          Get Quote
+          Get an Estimate
         </a>
       </div>
 
@@ -161,7 +154,7 @@ import { Menu, X, Phone, Mail } from "@lucide/astro";
         class="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg active:scale-95 transition-all"
         data-mobile-link
       >
-        Get Free Quote
+        Get an Estimate
       </a>
     </div>
   </div>

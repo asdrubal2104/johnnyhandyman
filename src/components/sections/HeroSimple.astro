@@ -18,15 +18,15 @@ interface Feature {
 const slides: Slide[] = [
   {
     src: HeroImage1,
-    alt: "Professional Home Maintenance Services",
+    alt: "Professional Home Maintenance Services in Ogden",
   },
   {
     src: HeroImage2,
-    alt: "Expert Plumbing and Repair Services",
+    alt: "Expert Plumbing and Repair Services in Ogden",
   },
   {
     src: HeroImage3,
-    alt: "Professional Drywall Installation and Repair",
+    alt: "Professional Drywall Installation and Repair in Utah",
   },
 ];
 
@@ -67,14 +67,17 @@ const features: Feature[] = [
         data-animate-title
         class="text-4xl sm:text-5xl md:text-7xl font-bold font-inter leading-tight tracking-tight"
       >
-        Trusted Handyman Services <span class="text-orange-500">in Utah</span>
+        Your Trusted Ogden Handyman & <span class="text-orange-500"
+          >Support</span
+        >
       </h1>
 
       <p
         data-animate-subtitle
         class="text-lg md:text-2xl font-roboto max-w-2xl mx-auto text-gray-200"
       >
-        Professional home repairs and maintenance for apartments and houses.
+        Expert home repair and maintenance for homeowners and landlords in
+        Ogden.
       </p>
 
       <div
@@ -85,13 +88,13 @@ const features: Feature[] = [
           href="/contact"
           class="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white py-4 px-10 rounded-xl font-semibold shadow-lg transition-all hover:scale-105 active:scale-95 text-center"
         >
-          Request a Free Quote
+          Get an Estimate
         </a>
         <a
           href="/services"
           class="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white py-4 px-10 rounded-xl font-semibold transition-all hover:border-white text-center"
         >
-          View Services
+          Explore Our Services
         </a>
       </div>
 
@@ -190,10 +193,10 @@ const features: Feature[] = [
       if (existingInterval) clearInterval(existingInterval);
 
       const slides = container.querySelectorAll(
-        "[data-hero-slide]"
+        "[data-hero-slide]",
       ) as NodeListOf<HTMLElement>;
       const dots = container.querySelectorAll(
-        "[data-hero-dot]"
+        "[data-hero-dot]",
       ) as NodeListOf<HTMLElement>;
 
       if (slides.length === 0) return;
@@ -216,7 +219,7 @@ const features: Feature[] = [
           gsap.fromTo(
             slides[current],
             { opacity: 0, scale: 1.05 },
-            { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }
+            { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
           );
         }
 
@@ -252,7 +255,7 @@ const features: Feature[] = [
         (e: any) => {
           touchStartX = e.changedTouches[0].screenX;
         },
-        { passive: true }
+        { passive: true },
       );
 
       container.addEventListener(
@@ -265,7 +268,7 @@ const features: Feature[] = [
             startAutoplay();
           }
         },
-        { passive: true }
+        { passive: true },
       );
 
       dots.forEach((dot, idx) => {

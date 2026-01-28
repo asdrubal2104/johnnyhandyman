@@ -71,10 +71,10 @@ const {
             <div>
               <div class="text-sm text-gray-400">Call Us</div>
               <a
-                href="tel:+18015551234"
+                href="tel:(863) 266-1866"
                 class="text-white font-semibold hover:text-orange-500 transition-colors"
               >
-                (801) 555-1234
+                (863) 266-1866
               </a>
             </div>
           </div>
@@ -161,10 +161,10 @@ const {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const content = entry.target.querySelector(
-                "[data-animate-location-content]"
+                "[data-animate-location-content]",
               );
               const image = entry.target.querySelector(
-                "[data-animate-location-image]"
+                "[data-animate-location-image]",
               );
               if (content) content.classList.add("reveal-active");
               if (image) image.classList.add("reveal-active");
@@ -172,7 +172,7 @@ const {
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       document

@@ -5,8 +5,8 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
 ---
 
 <BaseLayout
-  title="Contact Johnny Pro Handyman | Get Your Free Quote Today"
-  description="Contact Johnny Pro Handyman Services for a free quote. Call (801) 555-1234 or fill out our form. Serving all of Utah with professional home repair services."
+  title="Contact Johnny Pro Handyman | Get Your Estimate Today"
+  description="Contact Johnny Pro Handyman Services for an estimate. Call (863) 266-1866 or fill out our form. Serving Ogden and Weber County with professional home repair services."
 >
   <SchemaLocal />
 
@@ -15,12 +15,11 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 font-inter">
-          Get Your <span class="text-orange-500">Free Quote</span>
+          Get Your <span class="text-orange-500">Estimate</span>
         </h1>
         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Ready to start your project? Contact us today for a free,
-          no-obligation quote. We're here to help with all your home repair and
-          maintenance needs.
+          Ready to start your project? Contact us today to get an estimate.
+          We're here to help with all your home repair and maintenance needs.
         </p>
       </div>
 
@@ -215,11 +214,11 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
             <ul class="space-y-2">
               <li class="flex items-center gap-2">
                 <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
-                Free estimates on all projects
+                Estimates on every job
               </li>
               <li class="flex items-center gap-2">
                 <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
-                Same-day service available
+                Same-day service often available
               </li>
               <li class="flex items-center gap-2">
                 <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
@@ -237,10 +236,11 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
-          Serving <span class="text-orange-500">All of Utah</span>
+          Serving <span class="text-orange-500">Ogden & Surrounding Areas</span>
         </h2>
         <p class="text-xl text-gray-400">
-          Professional handyman services available throughout the state
+          Professional handyman services available throughout Weber County and
+          beyond
         </p>
       </div>
 
@@ -249,18 +249,18 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
       >
         {
           [
-            "Salt Lake City",
-            "Provo",
-            "West Valley City",
-            "West Jordan",
-            "Orem",
-            "Sandy",
             "Ogden",
-            "St. George",
+            "South Ogden",
+            "North Ogden",
+            "Riverdale",
+            "Roy",
+            "West Haven",
+            "Washington Terrace",
+            "Pleasant View",
             "Layton",
-            "South Jordan",
-            "Millcreek",
-            "Taylorsville",
+            "Clearfield",
+            "Kaysville",
+            "Farmington",
           ].map((city) => (
             <div class="bg-gray-900/50 border border-white/10 rounded-lg p-4 text-center hover:border-orange-500/50 transition-all">
               <span class="text-white font-medium">{city}</span>
@@ -281,7 +281,7 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
   function setupContact() {
     const form = document.getElementById("contact-form") as HTMLFormElement;
     const submitBtn = form?.querySelector(
-      'button[type="submit"]'
+      'button[type="submit"]',
     ) as HTMLButtonElement;
 
     if (form && submitBtn) {
@@ -312,13 +312,13 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
 
           // Simulamos éxito para el usuario
           alert(
-            "Thank you! Your message has been sent successfully. We will contact you soon."
+            "Thank you! Your message has been sent successfully. We will contact you soon.",
           );
           form.reset();
         } catch (err) {
           console.error(err);
           alert(
-            "There was an error sending your message. Please try again later."
+            "There was an error sending your message. Please try again later.",
           );
         } finally {
           submitBtn.disabled = false;

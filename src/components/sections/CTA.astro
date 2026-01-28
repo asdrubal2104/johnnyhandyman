@@ -29,9 +29,9 @@ import { Phone, ArrowRight } from "@lucide/astro";
           Ready to Get Started?
         </h2>
         <p class="text-xl mb-8 text-white/90 leading-relaxed">
-          Get a free, no-obligation quote for your project. Johnny Pro Handyman
-          Services is here to help with all your home repair and maintenance
-          needs across Utah.
+          Get an Estimate for Your Project. Johnny Pro Handyman Services is here
+          to help with all your home repair and maintenance needs across Ogden
+          and Weber County.
         </p>
 
         <ul class="space-y-4 mb-8">
@@ -46,7 +46,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
                   clip-rule="evenodd"></path>
               </svg>
             </div>
-            <span class="text-lg">Free estimates on all projects</span>
+            <span class="text-lg">Estimates on every job</span>
           </li>
           <li class="flex items-start gap-3">
             <div
@@ -59,7 +59,8 @@ import { Phone, ArrowRight } from "@lucide/astro";
                   clip-rule="evenodd"></path>
               </svg>
             </div>
-            <span class="text-lg">Licensed and insured professional</span>
+            <span class="text-lg">Fully licensed and insured professionals</span
+            >
           </li>
           <li class="flex items-start gap-3">
             <div
@@ -72,7 +73,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
                   clip-rule="evenodd"></path>
               </svg>
             </div>
-            <span class="text-lg">Same-day service available</span>
+            <span class="text-lg">Same-day service often available</span>
           </li>
           <li class="flex items-start gap-3">
             <div
@@ -85,7 +86,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
                   clip-rule="evenodd"></path>
               </svg>
             </div>
-            <span class="text-lg">100% satisfaction guaranteed</span>
+            <span class="text-lg">Satisfaction guaranteed</span>
           </li>
         </ul>
 
@@ -94,17 +95,17 @@ import { Phone, ArrowRight } from "@lucide/astro";
             href="/contact"
             class="inline-flex items-center justify-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95 group"
           >
-            Get Free Quote
+            Get My Quote
             <ArrowRight
               class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
             />
           </a>
           <a
-            href="tel:+18015551234"
+            href="tel:(863) 266-1866"
             class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
           >
             <Phone class="w-5 h-5" />
-            (801) 555-1234
+            (863) 266-1866
           </a>
         </div>
       </div>
@@ -117,7 +118,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
           <div class="grid grid-cols-2 gap-6">
             <div class="text-center p-6 bg-white/10 rounded-xl">
               <div class="text-5xl font-bold mb-2">15+</div>
-              <div class="text-white/80">Years Experience</div>
+              <div class="text-white/80">Years of Experience</div>
             </div>
             <div class="text-center p-6 bg-white/10 rounded-xl">
               <div class="text-5xl font-bold mb-2">500+</div>
@@ -125,7 +126,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
             </div>
             <div class="text-center p-6 bg-white/10 rounded-xl">
               <div class="text-5xl font-bold mb-2">100+</div>
-              <div class="text-white/80">Projects Done</div>
+              <div class="text-white/80">Projects Completed</div>
             </div>
             <div class="text-center p-6 bg-white/10 rounded-xl">
               <div class="text-5xl font-bold mb-2">5★</div>
@@ -170,7 +171,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const content = entry.target.querySelector(
-              "[data-animate-content]"
+              "[data-animate-content]",
             );
             const image = entry.target.querySelector("[data-animate-image]");
             if (content) content.classList.add("reveal-active");
@@ -179,7 +180,7 @@ import { Phone, ArrowRight } from "@lucide/astro";
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     document.querySelectorAll(".cta-section").forEach((section) => {

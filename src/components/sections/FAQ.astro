@@ -7,42 +7,42 @@ const defaultFaqs = [
   {
     question: "What areas do you serve in Utah?",
     answer:
-      "We provide handyman services throughout Utah, including Salt Lake City, Provo, Ogden, Sandy, West Valley City, and surrounding areas. Contact us to confirm service availability in your specific location.",
+      "We primarily serve Ogden and the greater Weber County area, including South Ogden, North Ogden, and Riverdale. We also cover surrounding areas like Salt Lake City and Layton for larger projects. Call to confirm availability.",
   },
   {
     question: "How quickly can you respond to service requests?",
     answer:
-      "We guarantee a response within 24 hours for all inquiries. For urgent repairs, we offer same-day service when available. Emergency services can often be scheduled within a few hours.",
+      "We aim to respond to all inquiries within 24 hours. For urgent repairs, we often have same-day availability. Emergency services can frequently be scheduled within a few hours.",
   },
   {
     question: "Are you licensed and insured?",
     answer:
-      "Yes, Johnny Pro Handyman Services is fully licensed and insured. We carry comprehensive liability insurance to protect both our clients and our team during all projects.",
+      "Yes, Johnny Pro Handyman Services is fully licensed and insured. We carry comprehensive liability insurance for your peace of mind and protection.",
   },
   {
-    question: "Do you provide free estimates?",
+    question: "Do you provide estimates?",
     answer:
-      "Absolutely! We offer free, no-obligation estimates for all projects. We'll assess your needs, discuss options, and provide a detailed quote before any work begins.",
+      "Absolutely. We provide transparent estimates for every project. We'll assess your needs and give you a detailed quote before starting any work.",
   },
   {
     question: "What types of payment do you accept?",
     answer:
-      "We accept various payment methods including cash, checks, credit cards, and digital payments. Payment is typically due upon completion of the work, and we'll provide a detailed invoice.",
+      "We accept cash, checks, major credit cards, and digital payments. Payment is generally due upon completion, and you'll receive a detailed invoice.",
   },
   {
     question: "What is your warranty policy?",
     answer:
-      "We stand behind our work with a satisfaction guarantee. If you're not completely satisfied with our service, we'll make it right. Specific warranties vary by project type and will be discussed upfront.",
+      "We stand behind our work with a satisfaction guarantee. If you're not happy, we'll make it right. Specific warranties vary by project and will be clearly explained upfront.",
   },
   {
     question: "Can you handle both small repairs and large projects?",
     answer:
-      "Yes! We handle everything from minor repairs like fixing a leaky faucet to larger projects like complete room renovations. No job is too small or too large for our team.",
+      "Yes! We handle everything from minor repairs—like a leaky faucet—to larger renovations. No job is too small or too big for our team.",
   },
   {
     question: "Do I need to provide materials, or do you supply them?",
     answer:
-      "We can work either way! We're happy to use materials you've purchased, or we can source quality materials for you. We'll discuss the best approach during your estimate.",
+      "We can work either way. We're happy to use materials you've already purchased, or we can source high-quality materials for you. We'll find the best solution during your estimate.",
   },
 ];
 
@@ -98,7 +98,7 @@ const faqList = faqs.length > 0 ? faqs : defaultFaqs;
                 </div>
               </div>
             </div>
-          )
+          ),
         )
       }
     </div>
@@ -215,7 +215,7 @@ const faqList = faqs.length > 0 ? faqs : defaultFaqs;
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       observer.observe(header);

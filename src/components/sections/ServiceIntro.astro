@@ -94,7 +94,7 @@ const {
           class="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-orange-500 text-white p-4 md:p-6 rounded-xl shadow-2xl"
         >
           <div class="text-3xl font-bold">15+</div>
-          <div class="text-sm">Years Experience</div>
+          <div class="text-sm">Years of Experience</div>
         </div>
       </div>
     </div>
@@ -133,10 +133,10 @@ const {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const content = entry.target.querySelector(
-              "[data-animate-service-content]"
+              "[data-animate-service-content]",
             );
             const image = entry.target.querySelector(
-              "[data-animate-service-image]"
+              "[data-animate-service-image]",
             );
             if (content) content.classList.add("reveal-active");
             if (image) image.classList.add("reveal-active");
@@ -144,7 +144,7 @@ const {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     document.querySelectorAll(".service-intro-section").forEach((section) => {

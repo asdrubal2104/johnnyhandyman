@@ -1,46 +1,53 @@
 ---
-import { Wrench, Droplet, Zap, Paintbrush, Hammer, Home } from "@lucide/astro";
+import { Wrench, Droplet, Zap, Paintbrush, Hammer, Home, Sparkles } from "@lucide/astro";
 
 const services = [
   {
     icon: Hammer,
     title: "Drywall Repair & Installation",
-    description: "Expert drywall repair, patching, and installation. From small holes to complete wall replacements.",
+    description: "Expert drywall repair, patching, and installation—from small holes to complete wall replacements.",
     href: "/services/drywall-repair",
     features: ["Hole Patching", "Texture Matching", "Full Installation", "Finishing"]
   },
   {
     icon: Droplet,
     title: "Plumbing Services",
-    description: "Reliable plumbing solutions for leaks, installations, and repairs. Quick response, quality work.",
+    description: "Reliable plumbing solutions for leaks, installations, and repairs. Fast response and quality work.",
     href: "/services/plumbing-repair",
     features: ["Leak Repair", "Fixture Installation", "Pipe Repair", "Drain Cleaning"]
   },
   {
     icon: Zap,
     title: "Electrical Work",
-    description: "Safe and professional electrical services. Licensed and insured for your peace of mind.",
+    description: "Safe, professional electrical work. Fully licensed and insured for your peace of mind.",
     href: "/services/electrical-fixes",
     features: ["Outlet Installation", "Light Fixtures", "Switch Repair", "Wiring"]
   },
   {
     icon: Paintbrush,
     title: "Painting Services",
-    description: "Interior and exterior painting with attention to detail. Transform your space with fresh colors.",
+    description: "Interior and exterior painting with meticulous attention to detail. Transform your space with fresh colors.",
     href: "/services/painting-services",
     features: ["Interior Painting", "Exterior Painting", "Trim Work", "Color Consultation"]
   },
   {
+    icon: Sparkles,
+    title: "Professional Cleaning",
+    description: "Industrial, commercial, and residential cleaning. Deep cleans, move-outs, and ongoing maintenance.",
+    href: "/services/cleaning-services",
+    features: ["Industrial Cleaning", "Office Janitorial", "Home Deep Clean", "Post-Construction"]
+  },
+  {
     icon: Wrench,
     title: "Carpentry & Repairs",
-    description: "Custom carpentry and repair work. Doors, cabinets, trim, and more done right.",
+    description: "Custom carpentry and repair. Doors, cabinets, trim, and more—done right.",
     href: "/services/carpentry-repairs",
     features: ["Door Installation", "Cabinet Repair", "Trim & Molding", "Custom Work"]
   },
   {
     icon: Home,
     title: "General Maintenance",
-    description: "Complete home maintenance services. Keep your property in top condition year-round.",
+    description: "Complete home maintenance. Keep your property in top condition year-round.",
     href: "/services/home-maintenance",
     features: ["Preventive Care", "Seasonal Prep", "Minor Repairs", "Inspections"]
   }
@@ -49,15 +56,6 @@ const services = [
 
 <section class="py-20 bg-linear-to-b from-black to-gray-900 services-list-section">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section Header -->
-    <div class="text-center mb-16" data-animate-header>
-      <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-inter">
-        Our <span class="text-orange-500">Services</span>
-      </h2>
-      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-        Professional handyman services tailored to your needs. Quality workmanship guaranteed on every project.
-      </p>
-    </div>
 
     <!-- Services Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 services-grid">
@@ -112,13 +110,13 @@ const services = [
     <!-- Bottom CTA -->
     <div class="text-center mt-16" data-animate-cta>
       <p class="text-gray-400 mb-6 text-lg">
-        Don't see what you need? We handle a wide variety of home repair and maintenance tasks.
+        Don't see what you need? We handle a wide variety of repair and maintenance tasks throughout Ogden.
       </p>
       <a 
         href="/contact"
         class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
       >
-        Request Custom Quote
+        Request Custom Estimate
       </a>
     </div>
   </div>
