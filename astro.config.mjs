@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://johnnypro.com",
+  site: "https://johnnyprohandyman.com",
   integrations: [sitemap()],
   // Static Site Generation for maximum speed
   output: "static",

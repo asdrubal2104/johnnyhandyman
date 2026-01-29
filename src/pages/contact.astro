@@ -304,11 +304,23 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
           const formData = new FormData(form);
           const data = Object.fromEntries(formData.entries());
 
-          // Log localmente lo que se enviaría (en un sitio estático necesitas un servicio externo)
-          console.log("Form Data with reCAPTCHA token:", {
-            ...data,
-            recaptchaToken: token,
+          // Send data to our Cloudflare Function
+          const response = await fetch("/api/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...data,
+              recaptchaToken: token,
+            }),
           });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || "Failed to send message");
+          }
 
           // Simulamos éxito para el usuario
           alert(
