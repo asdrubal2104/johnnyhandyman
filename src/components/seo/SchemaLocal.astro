@@ -1,14 +1,14 @@
 ---
 const {
-  businessName = "Johnny Pro Handyman Services",
-  description = "Professional handyman services in Utah. Expert home repairs, maintenance, and improvements.",
-  telephone = "+18015551234",
+  businessName = "Johnny Pro Handyman",
+  description = "Professional handyman services in Utah. Licensed & insured. Same-day service available. Expert home repairs, maintenance, and improvements.",
+  telephone = "(863) 266-1866",
   email = "info@johnnyprohandyman.com",
   address = {
-    streetAddress: "",
-    addressLocality: "Utah",
+    streetAddress: "Serving all major areas",
+    addressLocality: "Ogden",
     addressRegion: "UT",
-    postalCode: "",
+    postalCode: "84401",
     addressCountry: "US",
   },
   geo = {
@@ -16,15 +16,16 @@ const {
     longitude: "-111.8910",
   },
   priceRange = "$$",
-  image = "https://www.example.com/images/johnny-pro-logo.jpg",
+  image = "https://johnnyprohandyman.com/images/johnny-pro-logo.jpg",
 } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  "@type": "LocalBusiness",
   "@id": "https://johnnyprohandyman.com/#localbusiness",
+  additionalType: "https://schema.org/HandymanService",
   name: businessName,
-  alternatename: "Johnny Pro Services",
+  alternateName: "Johnny Pro Services",
   description: description,
   image: image,
   logo: "https://johnnyprohandyman.com/logo.png",
@@ -34,9 +35,9 @@ const schema = {
   address: {
     "@type": "PostalAddress",
     streetAddress: "Serving all major areas",
-    addressLocality: "Salt Lake City",
+    addressLocality: "Ogden",
     addressRegion: "UT",
-    postalCode: "84111",
+    postalCode: "84401",
     addressCountry: "US",
   },
   geo: {
@@ -62,6 +63,11 @@ const schema = {
   areaServed: [
     {
       "@type": "City",
+      name: "Ogden",
+      sameAs: "https://en.wikipedia.org/wiki/Ogden,_Utah",
+    },
+    {
+      "@type": "City",
       name: "Salt Lake City",
       sameAs: "https://en.wikipedia.org/wiki/Salt_Lake_City",
     },
@@ -69,11 +75,6 @@ const schema = {
       "@type": "City",
       name: "Provo",
       sameAs: "https://en.wikipedia.org/wiki/Provo,_Utah",
-    },
-    {
-      "@type": "City",
-      name: "Ogden",
-      sameAs: "https://en.wikipedia.org/wiki/Ogden,_Utah",
     },
     {
       "@type": "City",
@@ -87,6 +88,10 @@ const schema = {
     {
       "@type": "City",
       name: "Orem",
+    },
+    {
+      "@type": "AdministrativeArea",
+      name: "Weber County",
     },
     {
       "@type": "AdministrativeArea",
@@ -105,21 +110,232 @@ const schema = {
     worstRating: "1",
   },
   sameAs: [
-    "https://www.facebook.com/johnnypro",
-    "https://www.instagram.com/johnnypro",
-    "https://www.twitter.com/johnnypro",
-    "https://www.linkedin.com/company/johnnypro",
+    "https://www.facebook.com/johnnyprohandyman",
+    "https://www.instagram.com/johnnyprohandyman",
+    "https://www.twitter.com/johnnyprohandyman",
+    "https://www.linkedin.com/company/johnnyprohandyman",
   ],
-  paymentAccepted: ["Cash", "Credit Card", "Check", "Venmo"],
+  paymentAccepted: ["Cash", "Venmo", "Zelle"],
   currenciesAccepted: "USD",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Handyman Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Drywall Repair & Installation",
+          description:
+            "Professional drywall repair, installation, patching, and finishing.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Plumbing Services",
+          description:
+            "Minor plumbing repairs, fixture installation, and maintenance.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Electrical Work",
+          description:
+            "Minor electrical repairs, fixture installation, and wiring services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Painting Services",
+          description: "Interior and exterior professional painting services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Professional Cleaning",
+          description:
+            "Deep cleaning and general cleaning services for homes and offices.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Carpentry & Repairs",
+          description:
+            "Expert carpentry services including repairs and custom projects.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "General Maintenance",
+          description:
+            "Comprehensive general home maintenance and repair services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Door Installation & Repair",
+          description:
+            "Installation and repair of interior and exterior doors.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Window Repair",
+          description: "Expert window repair and maintenance services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Cabinet Installation",
+          description:
+            "Professional cabinet installation for kitchens, bathrooms, and more.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Shelving & Storage",
+          description: "Custom shelving and storage solutions installation.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Trim & Molding",
+          description:
+            "Installation and repair of crown molding, baseboards, and trim.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Tile Repair",
+          description: "Professional tile repair and replacement services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Flooring Repair",
+          description: "Expert repair for various types of flooring.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Fence Repair",
+          description: "Professional fence repair and maintenance services.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Deck Maintenance",
+          description: "Cleaning, staining, and repair services for decks.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Gutter Cleaning",
+          description: "Safe and thorough gutter cleaning and maintenance.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Pressure Washing",
+          description:
+            "Professional pressure washing for driveways, decks, and exteriors.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Assembly Services",
+          description: "Expert assembly of furniture, equipment, and more.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "TV Mounting",
+          description: "Professional TV mounting and cable management.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Smart Home Installation",
+          description:
+            "Setup and installation of smart home devices and systems.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Weatherproofing",
+          description:
+            "Home weatherproofing services to improve energy efficiency.",
+        },
+      },
+    ],
+  },
   knowsAbout: [
-    "Drywall Repair",
-    "Plumbing",
+    "Drywall Repair & Installation",
+    "Plumbing Services",
     "Electrical Work",
-    "Painting",
-    "Carpentry",
-    "Home Maintenance",
+    "Painting Services",
+    "Professional Cleaning",
+    "Carpentry & Repairs",
+    "General Maintenance",
+    "Door Installation & Repair",
+    "Window Repair",
+    "Cabinet Installation",
+    "Shelving & Storage",
+    "Trim & Molding",
+    "Tile Repair",
+    "Flooring Repair",
+    "Fence Repair",
+    "Deck Maintenance",
+    "Gutter Cleaning",
+    "Pressure Washing",
+    "Assembly Services",
+    "TV Mounting",
+    "Smart Home Installation",
+    "Weatherproofing",
   ],
+  slogan: "Reliable, Professional, and Insured Handyman Services",
 };
 ---
 

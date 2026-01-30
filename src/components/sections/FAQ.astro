@@ -5,49 +5,49 @@ const { faqs = [] } = Astro.props;
 
 const defaultFaqs = [
   {
-    question: "What areas do you serve in Utah?",
+    question: "How much does a handyman cost near me?",
     answer:
-      "We primarily serve Ogden and the greater Weber County area, including South Ogden, North Ogden, and Riverdale. We also cover surrounding areas like Salt Lake City and Layton for larger projects. Call to confirm availability.",
+      "Johnny Pro Handyman offers competitive rates with transparent pricing in Ogden and surrounding areas. Our hourly rates typically range from $75-$125 depending on the complexity of the job. Contact us for a personalized quote for your specific needs. Many small repairs can be completed in 1-2 hours, making professional handyman services more affordable than you might think.",
   },
   {
-    question: "How quickly can you respond to service requests?",
+    question: "Do you offer same-day handyman service in Utah?",
     answer:
-      "We aim to respond to all inquiries within 24 hours. For urgent repairs, we often have same-day availability. Emergency services can frequently be scheduled within a few hours.",
+      "Yes! We understand that some repairs can't wait. Johnny Pro Handyman offers same-day service for urgent repairs throughout Ogden, Salt Lake City, and surrounding Utah areas. Whether it's a leaky faucet, broken door lock, or electrical issue, we prioritize emergency calls and strive to provide prompt, professional service when you need it most.",
   },
   {
     question: "Are you licensed and insured?",
     answer:
-      "Yes, Johnny Pro Handyman Services is fully licensed and insured. We carry comprehensive liability insurance for your peace of mind and protection.",
+      "Absolutely. Johnny Pro Handyman is fully licensed and insured to protect both our clients and our team. We carry comprehensive liability insurance and workers' compensation coverage, giving you complete peace of mind. Our technicians are trained professionals who follow all local building codes and safety regulations in Weber County.",
   },
   {
-    question: "Do you provide estimates?",
+    question: "What payment methods do you accept?",
     answer:
-      "Absolutely. We provide transparent estimates for every project. We'll assess your needs and give you a detailed quote before starting any work.",
-  },
-  {
-    question: "What types of payment do you accept?",
-    answer:
-      "We accept cash, checks, major credit cards, and digital payments. Payment is generally due upon completion, and you'll receive a detailed invoice.",
-  },
-  {
-    question: "What is your warranty policy?",
-    answer:
-      "We stand behind our work with a satisfaction guarantee. If you're not happy, we'll make it right. Specific warranties vary by project and will be clearly explained upfront.",
-  },
-  {
-    question: "Can you handle both small repairs and large projects?",
-    answer:
-      "Yes! We handle everything from minor repairs—like a leaky faucet—to larger renovations. No job is too small or too big for our team.",
+      "For your convenience, we accept cash and electronic transfers including Venmo and Zelle. Payment is typically due upon completion of the work. We believe in transparent pricing, so you'll always know the cost before we start any project.",
   },
   {
     question: "Do I need to provide materials, or do you supply them?",
     answer:
-      "We can work either way. We're happy to use materials you've already purchased, or we can source high-quality materials for you. We'll find the best solution during your estimate.",
+      "We can work either way. We're happy to use materials you've already purchased, or we can source high-quality materials for you. We'll find the best solution during your project assessment for TV mounting, plumbing fixtures, or any home repair.",
   },
 ];
 
 const faqList = faqs.length > 0 ? faqs : defaultFaqs;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqList.map((faq: { question: string; answer: string }) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section class="py-20 bg-black faq-section">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
