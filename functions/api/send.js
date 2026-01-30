@@ -2,35 +2,43 @@ export async function onRequestPost(context) {
   const { request, env } = context;
 
   try {
-    // 2. Validar que la API Key esté presente
+    // Validate that the API Key is present
     if (!env.RESEND_API_KEY) {
-      return new Response(JSON.stringify({ error: "Falta la configuración API Key en Cloudflare." }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          error: "Missing API Key configuration in Cloudflare.",
+        }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     const data = await request.json();
     const { name, email, phone, service, message } = data;
 
-    // 3. MEJOR PRÁCTICA: Validación básica de campos requeridos antes de llamar a Resend
+    // BEST PRACTICE: Basic validation of required fields before calling Resend
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Nombre, Email y Mensaje son obligatorios." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "Name, Email, and Message are required." }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${env.RESEND_API_KEY}`, // Ahora 'env' sí existe
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        // Como tu dominio ya está verificado, esto es lo correcto:
+        // Domain is verified, using the correct sender address
         from: "Johnny Pro Handyman <info@johnnyprohandyman.com>",
-        to: ["asdrubalgaitan2104@gmail.com"],
+        to: ["info@johnnyprohandyman.com"],
         reply_to: email,
         subject: `New Contact Request: ${service || "General Inquiry"}`,
         html: `
@@ -199,11 +207,11 @@ export async function onRequestPost(context) {
           </div>
           <div class="info-row">
             <div class="info-label">Phone Number</div>
-            <div class="info-value"><a href="tel:${phone}" style="color: #111827; text-decoration: none;">${phone || 'Not Provided'}</a></div>
+            <div class="info-value"><a href="tel:${phone}" style="color: #111827; text-decoration: none;">${phone || "Not Provided"}</a></div>
           </div>
           <div class="info-row">
             <div class="info-label">Service Needed</div>
-            <div class="info-value" style="text-transform: capitalize;">${(service || 'General Inquiry').replace(/-/g, ' ')}</div>
+            <div class="info-value" style="text-transform: capitalize;">${(service || "General Inquiry").replace(/-/g, " ")}</div>
           </div>
         </div>
 
@@ -232,21 +240,26 @@ export async function onRequestPost(context) {
     const responseData = await res.json();
 
     if (!res.ok) {
-      return new Response(JSON.stringify({ error: responseData.message || "Error en Resend" }), {
-        status: res.status,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: responseData.message || "Error in Resend" }),
+        {
+          status: res.status,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-
   } catch (err) {
-    return new Response(JSON.stringify({ error: "Error interno: " + err.message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Internal error: " + err.message }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
   }
 }
