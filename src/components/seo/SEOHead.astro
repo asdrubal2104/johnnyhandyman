@@ -1,7 +1,9 @@
 ---
 const { title, description, canonical, ogImage } = Astro.props;
 
-const siteUrl = "https://johnnypro.com";
+const siteUrl = Astro.site
+  ? Astro.site.origin
+  : "https://johnnyprohandyman.com";
 const finalCanonical =
   canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
 const finalOgImage = ogImage ?? `${siteUrl}/images/og-default.jpg`;
