@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ZoomIn, X, Star, ChevronLeft, ChevronRight } from "@lucide/astro";
 import { Image } from "astro:assets";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
 
 const imageFiles = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/Works/*.webp",
@@ -29,6 +30,7 @@ const totalPages = Math.ceil(allImages.length / ITEMS_PER_PAGE);
   title="Gallery - Johnny Pro Handyman Projects | Before & After Photos"
   description="View our portfolio of completed handyman projects in Utah. See the quality of our work in drywall, plumbing, electrical, painting, and carpentry."
 >
+  <Breadcrumbs />
   <!-- Hero Section -->
   <section class="relative py-20 bg-linear-to-b from-gray-900 to-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,13 +134,13 @@ const totalPages = Math.ceil(allImages.length / ITEMS_PER_PAGE);
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href="/contact"
-          class="inline-block bg-white text-orange-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95"
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-white text-orange-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-95"
         >
           Get an Estimate
         </a>
         <a
           href="tel:(863) 266-1866"
-          class="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
         >
           Call (863) 266-1866
         </a>

@@ -16,9 +16,9 @@ export async function onRequestPost(context) {
     }
 
     const data = await request.json();
-    const { name, email, phone, service, message } = data;
+    const { name, email, phone, service, message, recaptchaToken } = data;
 
-    // BEST PRACTICE: Basic validation of required fields before calling Resend
+    // 1. Basic validation of required fields
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: "Name, Email, and Message are required." }),
@@ -27,6 +27,28 @@ export async function onRequestPost(context) {
           headers: { "Content-Type": "application/json" },
         },
       );
+    }
+
+    // 2. Optional ReCAPTCHA validation (if token is provided)
+    if (recaptchaToken && env.RECAPTCHA_SECRET_KEY) {
+      try {
+        const verifyRes = await fetch(
+          "https://www.google.com/recaptcha/api/siteverify",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `secret=${env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+          },
+        );
+        const verifyData = await verifyRes.json();
+        if (!verifyData.success || verifyData.score < 0.5) {
+          console.error("ReCAPTCHA verification failed:", verifyData);
+          // We can choose to block or just log. For now, let's just log or block if it's clearly a bot.
+          // return new Response(JSON.stringify({ error: "Security check failed. Please try again." }), { status: 403 });
+        }
+      } catch (err) {
+        console.error("Error verifying ReCAPTCHA:", err);
+      }
     }
 
     const res = await fetch("https://api.resend.com/emails", {

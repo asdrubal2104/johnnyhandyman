@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Phone, Mail, MapPin, Clock, Send } from "@lucide/astro";
 import SchemaLocal from "@/components/seo/SchemaLocal.astro";
+import Breadcrumbs from "@/components/layout/Breadcrumbs.astro";
 ---
 
 <BaseLayout
@@ -9,6 +10,7 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
   description="Contact Johnny Pro Handyman Services for an estimate. Call (863) 266-1866 or fill out our form. Serving Ogden and Weber County with professional home repair services."
 >
   <SchemaLocal />
+  <Breadcrumbs />
 
   <!-- Hero Section -->
   <section class="relative py-20 bg-linear-to-b from-gray-900 to-black">
@@ -325,84 +327,107 @@ import SchemaLocal from "@/components/seo/SchemaLocal.astro";
   <script>
     function setupContact() {
       const form = document.getElementById("contact-form") as HTMLFormElement;
-      const submitBtn = form?.querySelector(
-        'button[type="submit"]',
-      ) as HTMLButtonElement;
+      if (!form) return;
 
-      // Remove existing listeners to prevent duplicates if this runs multiple times
-      // Cloning the node is a clean way to drop all event listeners
-      if (form) {
-        const newForm = form.cloneNode(true) as HTMLFormElement;
-        form.parentNode?.replaceChild(newForm, form);
+      // Use a more robust way to handle the form submission
+      // instead of cloning which can be tricky with ReCAPTCHA
+      form.onsubmit = async (e) => {
+        e.preventDefault();
 
-        // Re-query the button from the new form
-        const newSubmitBtn = newForm.querySelector(
+        const submitBtn = form.querySelector(
           'button[type="submit"]',
         ) as HTMLButtonElement;
+        if (!submitBtn || submitBtn.disabled) return;
 
-        if (newForm && newSubmitBtn) {
-          newForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
+        submitBtn.disabled = true;
+        const originalContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline ml-[-4px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Sending...
+        `;
 
-            newSubmitBtn.disabled = true;
-            const originalContent = newSubmitBtn.innerHTML;
-            newSubmitBtn.innerHTML = "Sending...";
+        try {
+          let token = "";
+          const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
-            try {
-              const grecaptcha = (window as any).grecaptcha;
-              await new Promise((resolve) => grecaptcha.ready(resolve));
-
-              const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
-              const token = await grecaptcha.execute(siteKey, {
-                action: "submit_contact",
+          // Add a timeout for ReCAPTCHA to avoid hanging on mobile/slow networks
+          try {
+            const grecaptcha = (window as any).grecaptcha;
+            if (grecaptcha && siteKey) {
+              const tokenPromise = new Promise<string>((resolve, reject) => {
+                const timeout = setTimeout(
+                  () => reject(new Error("ReCAPTCHA timeout")),
+                  8000,
+                );
+                grecaptcha.ready(async () => {
+                  try {
+                    const t = await grecaptcha.execute(siteKey, {
+                      action: "submit_contact",
+                    });
+                    clearTimeout(timeout);
+                    resolve(t);
+                  } catch (err) {
+                    reject(err);
+                  }
+                });
               });
-
-              const formData = new FormData(newForm);
-              const data = Object.fromEntries(formData.entries());
-
-              // Send data to our Cloudflare Function
-              const response = await fetch("/api/send", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  ...data,
-                  recaptchaToken: token,
-                }),
-              });
-
-              const result = await response.json();
-
-              if (!response.ok) {
-                throw new Error(result.error || "Failed to send message");
-              }
-
-              // Show success message
-              const successMessage = document.querySelector("#success-message");
-              if (successMessage) {
-                successMessage.classList.remove("hidden");
-                newForm.style.display = "none"; // Hide the form
-              }
-
-              newForm.reset();
-              // Scroll to the message
-              successMessage?.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-              });
-            } catch (err) {
-              console.error(err);
-              alert(
-                "There was an error sending your message. Please try again later.",
-              );
-            } finally {
-              newSubmitBtn.disabled = false;
-              newSubmitBtn.innerHTML = originalContent;
+              token = await tokenPromise;
             }
+          } catch (reCapErr) {
+            console.warn(
+              "ReCAPTCHA failed to load or timed out, continuing without token:",
+              reCapErr,
+            );
+            // We continue anyway, the server will decide if it requires it or not
+          }
+
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+
+          // Send data to our Cloudflare Function
+          const response = await fetch("/api/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...data,
+              recaptchaToken: token,
+            }),
           });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.error || "Failed to send message");
+          }
+
+          // Show success message
+          const successMessage = document.querySelector("#success-message");
+          if (successMessage) {
+            successMessage.classList.remove("hidden");
+            form.style.display = "none";
+          }
+
+          form.reset();
+          successMessage?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        } catch (err: any) {
+          console.error("Form submission error:", err);
+          alert(
+            err.message ||
+              "There was an error sending your message. Please check your connection and try again.",
+          );
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalContent;
         }
-      }
+      };
     }
 
     // Run on initial load and view transitions
